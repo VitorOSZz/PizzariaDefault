@@ -1,0 +1,47 @@
+@media screen and (min-width: 750px) {
+    .cards {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        justify-content: space-around;
+    }
+
+    .card {
+        display: inline-grid;
+        margin-right: 10px;
+        justify-content: space-around;
+    }
+}
+
+@media screen and (min-width: 924px) {
+
+    header #content {
+        width: 40vw;
+        margin: auto;
+
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+
+        padding: 10px;
+    }
+
+    main h2 {
+        font-size: 35px;
+    }
+
+    main h3 {
+        font-size: 27px;
+    }
+
+    .cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 240px));
+        gap: 24px;
+        justify-content: center;
+    }
+
+    main .card {
+        width: 240px;
+        margin: 10px auto;
+    }
+}
