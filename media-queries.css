@@ -1,14 +1,61 @@
 @media screen and (min-width: 750px) {
-    .cards {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        justify-content: space-around;
+    main section {
+        width: 100vw;
+
+        margin: auto;
     }
 
-    .card {
+    #best_sellers,
+    #pizzas,
+    #napoletanas,
+    #pizzas-size,
+    #calzones,
+    #drinks {
+        max-width: calc(100vw - 100px);
+    }
+
+    main .cards {
+        justify-content: left;
+    }
+
+    main .card {
+        width: 400px;
+    }
+
+    #best_sellers .cards {
+        justify-content: left;
+        grid-template-columns: repeat(auto-fit, minmax(120px, 130px));
+        gap: 12px;
+
+    }
+
+    #best_sellers .card {
         display: inline-grid;
-        margin-right: 10px;
         justify-content: space-around;
+
+        min-height: 50px;
+        width: 100%;
+
+        margin-right: 10px;
+    }
+
+    #best_sellers .card img {
+        width: 100%;
+        height: 100px;
+    }
+
+    .hero {
+        justify-content: left;
+    }
+
+    .restaurant-name,
+    .hero-content {
+        width: 35vw;
+    }
+
+    .restaurant-name,
+    .hero-content {
+        margin-left: 30px;
     }
 }
 
@@ -25,6 +72,15 @@
         padding: 10px;
     }
 
+    #scroll-indicator-text {
+        display: block;
+    }
+
+    .hero-content {
+        margin: auto;
+    }
+
+
     main h2 {
         font-size: 35px;
     }
@@ -33,15 +89,16 @@
         font-size: 27px;
     }
 
-    .cards {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(220px, 240px));
-        gap: 24px;
-        justify-content: center;
+    #best_sellers .card {
+        margin: 10px auto;
     }
 
-    main .card {
-        width: 240px;
-        margin: 10px auto;
+    #best_sellers .cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(120px, 170px));
+    }
+
+    #best_sellers .card {
+        max-width: 170px;
     }
 }

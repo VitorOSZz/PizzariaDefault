@@ -22,13 +22,13 @@
                 Massa artesanal, ingredientes selecionados e aquele sabor de pizzaria de verdade.
             </p>
 
-            <a href="#on_sale" class="hero-button">
+            <a href="#menu" class="hero-button">
                 Ver cardápio
             </a>
         </div>
 
-        <a href="#on_sale" class="scroll-indicator">
-            <span>Role para ver</span>
+        <a href="#menu" class="scroll-indicator">
+            <span id="scroll-indicator-text">Role para ver</span>
             <span class="scroll-arrow">↓</span>
         </a>
     </section>
@@ -50,39 +50,156 @@
         </div>
     </header>
 
-    <main>
-        <h2>Cardápio</h2>
-        <section id="on_sale">
-            <h3>Promoção</h3>
+    <main id="menu">
+        <section id="best_sellers">
+            <h3>Mais vendidos</h3>
+
             <div class="cards">
                 <div class="card">
-                    <img src="assets/cards/pizza_with_soda.avif" alt="">
-                    <div>
-                        <h4>Big + Refrigerante</h4>
-                        <p class="price">A partir de <span>R$ 60,00</span></p>
-                    </div>
-                </div>
-                <div class="card">
-                    <img src="assets/cards/giant_pizza_with_little_chocolate.avif" alt="">
-                    <div>
-                        <h4>Gigante + Broto com Refrigerante</h4>
-                        <p class="price">A partir de <span>R$ 90,00</span></p>
-                    </div>
+                    <img src="assets/cards/pizza-giant-size.jpg" alt="">
+                    <h4>Pizza Família (40cm - 12 Fatias) com Refrigerante 2L</h4>
+                    <p>A partir de <span>120,00</span></p>
                 </div>
 
                 <div class="card">
-                    <img src="assets/cards/giant_pizza_with_little_chocolate_witouth_soda.jpeg" alt="">
-                    <div>
-                        <h4>Gigante + Broto</h4>
-                        <p class="price">A partir de <span>R$ 80,00</span></p>
-                    </div>
+                    <img src="assets/cards/pizza-big-size.jpg" alt="">
+                    <h4>Pizza Grande (35cm - 8 Fatias)</h4>
+                    <p>A partir de <span>80,00</span></p>
+                </div>
+                <div class="card">
+                    <img src="assets/cards/pizza-medium-size.jpg" alt="">
+                    <h4>Pizza Média (30cm - 6 Fatias)</h4>
+                    <p>A partir de <span>60,00</span></p>
+                </div>
+                <div class="card contain">
+                    <img src="assets/cards/Soda 2L.png" alt="">
+                    <h4>Coca Cola 2L</h4>
+                    <p>A partir de <span>18,00</span></p>
+                </div>
+                <div class="card contain">
+                    <img src="assets/cards/Soda 2L without sugar.png" alt="">
+                    <h4>Coca Cola Zero 2L</h4>
+                    <p>A partir de <span>12,00</span></p>
                 </div>
             </div>
-
         </section>
-        <section id="pizzas"></section>
-        <section id="calzones"></section>
-        <section id="bebidas"></section>
+        <section id="pizzas">
+            <section id="napoletanas">
+                <h3>Pizzas Estilo Napoletanas</h3>
+
+                <div class="cards">
+                    <div class="card">
+                        <div>
+                            <h4>Pizza Napoletana</h4>
+                            <p>Pizza com 1 sabor e 4 fatias</p>
+                            <p>A partir de <span>R$ 68,00</span></p>
+                        </div>
+                        <img src="assets/cards/napoletana.webp" alt="">
+                    </div>
+                </div>
+            </section>
+
+            <section id="pizzas-size">
+                <h3>Pizzas</h3>
+
+                <div class="cards">
+
+                    <div class="card">
+                        <div>
+                            <h4>Família (40cm)</h4>
+                            <p>Pizza com ate 2 sabores e 12 fatias</p>
+                            <p>A partir de <span>R$ 120,00</span></p>
+                        </div>
+                        <img src="assets/cards/pizza-giant-size.jpg" alt="">
+                    </div>
+
+                    <div class="card">
+                        <div>
+                            <h4>Grande (35cm)</h4>
+                            <p>Pizza com ate 2 sabores e 8 fatias</p>
+                            <p>A partir de <span>R$ 80,00</span></p>
+                        </div>
+                        <img src="assets/cards/pizza-big-size.jpg" alt="">
+                    </div>
+
+                    <div class="card">
+                        <div>
+                            <h4>Média (30cm)</h4>
+                            <p>Pizza com ate 2 sabores e 6 fatias</p>
+                            <p>A partir de <span>R$ 60,00</span></p>
+                        </div>
+                        <img src="assets/cards/pizza-medium-size.jpg" alt="">
+                    </div>
+                </div>
+            </section>
+        </section>
+        <section id="calzones">
+            <h3>Calzones</h3>
+            <div class="cards">
+                <div class="card">
+                    <div>
+                        <h4>Quatro Queijos</h4>
+                        <p>Mussarela, parmesão, provolone, catupiry, molho de tomate e orégano</p>
+                        <p>A partir de <span>R$ 70,00</span></p>
+                    </div>
+                    <img src="assets/cards/calzone.jpg" alt="Pizza Quatro Queijos">
+                </div>
+
+                <div class="card">
+                    <div>
+                        <h4>Frango Especial</h4>
+                        <p>Mussarela, frango, palmito, catupiry, molho de tomate e orégano</p>
+                        <p>A partir de <span>R$ 70,00</span></p>
+                    </div>
+                    <img src="assets/cards/calzone.jpg" alt="Pizza Frango Especial">
+                </div>
+
+                <div class="card">
+                    <div>
+                        <h4>Canadense</h4>
+                        <p>Mussarela, lombo, champignon, palmito, catupiry, molho de tomate e orégano</p>
+                        <p>A partir de <span>R$ 70,00</span></p>
+                    </div>
+                    <img src="assets/cards/calzone.jpg" alt="Pizza Canadense">
+                </div>
+
+                <div class="card">
+                    <div>
+                        <h4>Pizzaiolo</h4>
+                        <p>Mussarela, presunto, milho, ervilha, cebola, azeitonas, molho de tomate e orégano</p>
+                        <p>A partir de <span>R$ 70,00</span></p>
+                    </div>
+                    <img src="assets/cards/calzone.jpg" alt="Pizza Pizzaiolo">
+                </div>
+
+                <div class="card">
+                    <div>
+                        <h4>Portuguesa</h4>
+                        <p>Mussarela, presunto, ovo, cebola, ervilha, milho, azeitona, molho de tomate e orégano</p>
+                        <p>A partir de <span>R$ 70,00</span></p>
+                    </div>
+                    <img src="assets/cards/calzone.jpg" alt="Pizza Portuguesa">
+                </div>
+            </div>
+        </section>
+        <section id="drinks">
+            <h3>Bebidas</h3>
+            <div class="cards">
+                <div class="card contain">
+                    <div>
+                        <h4>Refrigerantes</h4>
+                    </div>
+                    <img src="assets/cards/Soda 2L.png" alt="aba de Refrigerantes">
+                </div>
+
+                <div class="card contain">
+                    <div>
+                        <h4>Águas</h4>
+                    </div>
+                    <img src="assets/cards/water-bottle.jpg" alt="aba de Águas">
+                </div>
+            </div>
+        </section>
     </main>
 </body>
 
