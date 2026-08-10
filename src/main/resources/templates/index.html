@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pizzaria Default</title>
 
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="media-queries.css">
+    <link rel="stylesheet" th:href="@{/styles/style.css}">
+    <link rel="stylesheet" th:href="@{/styles/media-queries.css}">
 </head>
 
 <body>
@@ -38,13 +38,13 @@
         <div id="content">
             <!-- Telephone -->
             <div>
-                <img src="assets/icons/icon-telephone.png" alt="">
+                <img th:src="@{images/icons/icon-telephone.png}" alt="">
                 <p>+55 (41) 3334-2546</p>
             </div>
 
             <!-- Hour. Javascript to change -->
             <div>
-                <img src="assets/icons/icon-clock.png" alt="">
+                <img th:src="@{images/icons/icon-clock.png}" alt="">
                 <p>Sexta 18:00 às 23:30</p>
             </div>
         </div>
@@ -56,28 +56,28 @@
 
             <div class="cards">
                 <div class="card">
-                    <img src="assets/cards/pizza-giant-size.webp" alt="">
+                    <img th:src="@{images/cards/pizza-giant-size.webp}" alt="">
                     <h4>Pizza Família (40cm - 12 Fatias) com Refrigerante 2L</h4>
                     <p>A partir de <span>120,00</span></p>
                 </div>
 
                 <div class="card">
-                    <img src="assets/cards/pizza-big-size.webp" alt="">
+                    <img th:src="@{images/cards/pizza-big-size.webp}" alt="">
                     <h4>Pizza Grande (35cm - 8 Fatias)</h4>
                     <p>A partir de <span>80,00</span></p>
                 </div>
                 <div class="card">
-                    <img src="assets/cards/pizza-medium-size.webp" alt="">
+                    <img th:src="@{images/cards/pizza-medium-size.webp}" alt="">
                     <h4>Pizza Média (30cm - 6 Fatias)</h4>
                     <p>A partir de <span>60,00</span></p>
                 </div>
                 <div class="card contain">
-                    <img src="assets/cards/Soda 2L.webp" alt="">
+                    <img th:src="@{images/cards/Soda 2L.webp}" alt="">
                     <h4>Coca Cola 2L</h4>
                     <p>A partir de <span>18,00</span></p>
                 </div>
                 <div class="card contain">
-                    <img src="assets/cards/Soda 2L without sugar.webp" alt="">
+                    <img th:src="@{images/cards/Soda 2L without sugar.webp}" alt="">
                     <h4>Coca Cola Zero 2L</h4>
                     <p>A partir de <span>12,00</span></p>
                 </div>
@@ -94,7 +94,7 @@
                             <p>Pizza com 1 sabor e 4 fatias</p>
                             <p>A partir de <span>R$ 68,00</span></p>
                         </div>
-                        <img src="assets/cards/napoletana.webp" alt="">
+                        <img th:src="@{images/cards/napoletana.webp}" alt="">
                     </div>
                 </div>
             </section>
@@ -110,7 +110,7 @@
                             <p>Pizza com ate 2 sabores e 12 fatias</p>
                             <p>A partir de <span>R$ 120,00</span></p>
                         </div>
-                        <img src="assets/cards/pizza-giant-size.webp" alt="">
+                        <img th:src="@{images/cards/pizza-giant-size.webp}" alt="">
                     </div>
 
                     <div class="card">
@@ -119,7 +119,7 @@
                             <p>Pizza com ate 2 sabores e 8 fatias</p>
                             <p>A partir de <span>R$ 80,00</span></p>
                         </div>
-                        <img src="assets/cards/pizza-big-size.webp" alt="">
+                        <img th:src="@{images/cards/pizza-big-size.webp}" alt="">
                     </div>
 
                     <div class="card">
@@ -128,7 +128,7 @@
                             <p>Pizza com ate 2 sabores e 6 fatias</p>
                             <p>A partir de <span>R$ 60,00</span></p>
                         </div>
-                        <img src="assets/cards/pizza-medium-size.webp" alt="">
+                        <img th:src="@{images/cards/pizza-medium-size.webp}" alt="">
                     </div>
                 </div>
             </section>
@@ -142,7 +142,7 @@
                         <p>Mussarela, parmesão, provolone, catupiry, molho de tomate e orégano</p>
                         <p>A partir de <span>R$ 70,00</span></p>
                     </div>
-                    <img src="assets/cards/calzone.webp" alt="Pizza Quatro Queijos">
+                    <img th:src="@{images/cards/calzone.webp}" alt="Pizza Quatro Queijos">
                 </div>
 
                 <div class="card">
@@ -151,7 +151,7 @@
                         <p>Mussarela, frango, palmito, catupiry, molho de tomate e orégano</p>
                         <p>A partir de <span>R$ 70,00</span></p>
                     </div>
-                    <img src="assets/cards/calzone.webp" alt="Pizza Frango Especial">
+                    <img th:src="@{images/cards/calzone.webp}" alt="Pizza Frango Especial">
                 </div>
 
                 <div class="card">
@@ -160,7 +160,7 @@
                         <p>Mussarela, lombo, champignon, palmito, catupiry, molho de tomate e orégano</p>
                         <p>A partir de <span>R$ 70,00</span></p>
                     </div>
-                    <img src="assets/cards/calzone.webp" alt="Pizza Canadense">
+                    <img th:src="@{images/cards/calzone.webp}" alt="Pizza Canadense">
                 </div>
 
                 <div class="card">
@@ -169,7 +169,7 @@
                         <p>Mussarela, presunto, milho, ervilha, cebola, azeitonas, molho de tomate e orégano</p>
                         <p>A partir de <span>R$ 70,00</span></p>
                     </div>
-                    <img src="assets/cards/calzone.webp" alt="Pizza Pizzaiolo">
+                    <img th:src="@{images/cards/calzone.webp}" alt="Pizza Pizzaiolo">
                 </div>
 
                 <div class="card">
@@ -178,25 +178,20 @@
                         <p>Mussarela, presunto, ovo, cebola, ervilha, milho, azeitona, molho de tomate e orégano</p>
                         <p>A partir de <span>R$ 70,00</span></p>
                     </div>
-                    <img src="assets/cards/calzone.webp" alt="Pizza Portuguesa">
+                    <img th:src="@{images/cards/calzone.webp}" alt="Pizza Portuguesa">
                 </div>
             </div>
         </section>
         <section id="drinks">
             <h3>Bebidas</h3>
             <div class="cards">
-                <div class="card contain">
+                <div class="card" th:each="pizza : ${pizzas}">
                     <div>
-                        <h4>Refrigerantes</h4>
+                        <h4 th:text="${pizza.name}">Name</h4>
+                        <p th:text="${pizza.description}">Description</p>
+                        <p th:text="${price}">price</p>
                     </div>
-                    <img src="assets/cards/Soda 2L.webp" alt="aba de Refrigerantes">
-                </div>
-
-                <div class="card contain">
-                    <div>
-                        <h4>Águas</h4>
-                    </div>
-                    <img src="assets/cards/water-bottle.webp" alt="aba de Águas">
+                    <img th:src="@{'/images/cards/' + ${pizza.image_name}}" alt="">
                 </div>
             </div>
         </section>
