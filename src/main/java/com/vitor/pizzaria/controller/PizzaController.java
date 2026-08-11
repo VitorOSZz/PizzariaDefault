@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -20,4 +21,9 @@ class PizzaController {
         this.pizzaService = pizzaService;
     }
 
+    @GetMapping("pizza")
+    public String getChoicePizzaPage(@RequestParam(name="size") String size, Model model) {
+        model.addAttribute("size", size);
+        return "pizza";
+    }
 }
