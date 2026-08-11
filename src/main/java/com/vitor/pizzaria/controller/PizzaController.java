@@ -20,10 +20,5 @@ class PizzaController {
     PizzaController(PizzaService pizzaService) {
         this.pizzaService = pizzaService;
     }
-
-    @GetMapping("pizza")
-    public String getChoicePizzaPage(@RequestParam(name="size") String size, Model model) {
-        model.addAttribute("size", size);
-        return "pizza";
-    }
+    
 }

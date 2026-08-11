@@ -7,6 +7,7 @@
     <title>Pizzaria Default</title>
 
     <link rel="stylesheet" th:href="@{/styles/style.css}">
+    <link rel="stylesheet" th:href="@{/styles/modal.css}">
     <link rel="stylesheet" th:href="@{/styles/media-queries.css}">
 </head>
 
@@ -55,32 +56,35 @@
             <h3>Mais vendidos</h3>
 
             <div class="cards">
-                <div class="card">
+                <button class="card" type="button" data-product="pizza/giant">
                     <img th:src="@{images/cards/pizza-giant-size.webp}" alt="">
                     <h4>Pizza Família (40cm - 12 Fatias) com Refrigerante 2L</h4>
                     <p>A partir de <span>120,00</span></p>
-                </div>
+                </button>
 
-                <div class="card">
+                <button class="card" type="button" data-product="pizza/big">
                     <img th:src="@{images/cards/pizza-big-size.webp}" alt="">
                     <h4>Pizza Grande (35cm - 8 Fatias)</h4>
                     <p>A partir de <span>80,00</span></p>
-                </div>
-                <div class="card">
+                </button>
+
+                <button class="card" type="button" data-product="pizza/medium">
                     <img th:src="@{images/cards/pizza-medium-size.webp}" alt="">
                     <h4>Pizza Média (30cm - 6 Fatias)</h4>
                     <p>A partir de <span>60,00</span></p>
-                </div>
-                <div class="card contain">
+                </button>
+
+                <button class="card contain" type="button" data-product="drink/coca-cola-2l">
                     <img th:src="@{images/cards/Soda 2L.webp}" alt="">
                     <h4>Coca Cola 2L</h4>
                     <p>A partir de <span>18,00</span></p>
-                </div>
-                <div class="card contain">
+                </button>
+
+                <button class="card contain" type="button" data-product="drink/coca-cola-zero-2l">
                     <img th:src="@{images/cards/Soda 2L without sugar.webp}" alt="">
                     <h4>Coca Cola Zero 2L</h4>
                     <p>A partir de <span>12,00</span></p>
-                </div>
+                </button>
             </div>
         </section>
         <section id="pizzas">
@@ -88,14 +92,14 @@
                 <h3>Pizzas Estilo Napoletanas</h3>
 
                 <div class="cards">
-                    <div class="card">
+                    <button class="card">
                         <div>
                             <h4>Pizza Napoletana</h4>
                             <p>Pizza com 1 sabor e 4 fatias</p>
                             <p>A partir de <span>R$ 68,00</span></p>
                         </div>
                         <img th:src="@{images/cards/napoletana.webp}" alt="">
-                    </div>
+                    </button>
                 </div>
             </section>
 
@@ -104,98 +108,227 @@
 
                 <div class="cards">
 
-                    <div class="card">
+                    <button class="card">
                         <div>
                             <h4>Família (40cm)</h4>
                             <p>Pizza com ate 2 sabores e 12 fatias</p>
                             <p>A partir de <span>R$ 120,00</span></p>
                         </div>
                         <img th:src="@{images/cards/pizza-giant-size.webp}" alt="">
-                    </div>
+                    </button>
 
-                    <div class="card">
+                    <button class="card">
                         <div>
                             <h4>Grande (35cm)</h4>
                             <p>Pizza com ate 2 sabores e 8 fatias</p>
                             <p>A partir de <span>R$ 80,00</span></p>
                         </div>
                         <img th:src="@{images/cards/pizza-big-size.webp}" alt="">
-                    </div>
+                    </button>
 
-                    <div class="card">
+                    <button class="card">
                         <div>
                             <h4>Média (30cm)</h4>
                             <p>Pizza com ate 2 sabores e 6 fatias</p>
                             <p>A partir de <span>R$ 60,00</span></p>
                         </div>
                         <img th:src="@{images/cards/pizza-medium-size.webp}" alt="">
-                    </div>
+                    </button>
                 </div>
             </section>
         </section>
         <section id="calzones">
             <h3>Calzones</h3>
             <div class="cards">
-                <div class="card">
+                <button class="card">
                     <div>
                         <h4>Quatro Queijos</h4>
                         <p>Mussarela, parmesão, provolone, catupiry, molho de tomate e orégano</p>
                         <p>A partir de <span>R$ 70,00</span></p>
                     </div>
                     <img th:src="@{images/cards/calzone.webp}" alt="Pizza Quatro Queijos">
-                </div>
+                </button>
 
-                <div class="card">
+                <button class="card">
                     <div>
                         <h4>Frango Especial</h4>
                         <p>Mussarela, frango, palmito, catupiry, molho de tomate e orégano</p>
                         <p>A partir de <span>R$ 70,00</span></p>
                     </div>
                     <img th:src="@{images/cards/calzone.webp}" alt="Pizza Frango Especial">
-                </div>
+                </button>
 
-                <div class="card">
+                <button class="card">
                     <div>
                         <h4>Canadense</h4>
                         <p>Mussarela, lombo, champignon, palmito, catupiry, molho de tomate e orégano</p>
                         <p>A partir de <span>R$ 70,00</span></p>
                     </div>
                     <img th:src="@{images/cards/calzone.webp}" alt="Pizza Canadense">
-                </div>
+                </button>
 
-                <div class="card">
+                <button class="card">
                     <div>
                         <h4>Pizzaiolo</h4>
                         <p>Mussarela, presunto, milho, ervilha, cebola, azeitonas, molho de tomate e orégano</p>
                         <p>A partir de <span>R$ 70,00</span></p>
                     </div>
                     <img th:src="@{images/cards/calzone.webp}" alt="Pizza Pizzaiolo">
-                </div>
+                </button>
 
-                <div class="card">
+                <button class="card">
                     <div>
                         <h4>Portuguesa</h4>
                         <p>Mussarela, presunto, ovo, cebola, ervilha, milho, azeitona, molho de tomate e orégano</p>
                         <p>A partir de <span>R$ 70,00</span></p>
                     </div>
                     <img th:src="@{images/cards/calzone.webp}" alt="Pizza Portuguesa">
-                </div>
+                </button>
             </div>
         </section>
         <section id="drinks">
             <h3>Bebidas</h3>
             <div class="cards">
-                <div class="card" th:each="pizza : ${pizzas}">
+                <button class="card contain">
                     <div>
-                        <h4 th:text="${pizza.name}">Name</h4>
-                        <p th:text="${pizza.description}">Description</p>
-                        <p th:text="${price}">price</p>
+                        <h4>Refrigerantes</h4>
                     </div>
-                    <img th:src="@{'/images/cards/' + ${pizza.image_name}}" alt="">
-                </div>
+                    <img th:src="@{images/cards/Soda 2L.webp}" alt="aba de Refrigerantes">
+                </button>
+
+                <button class="card contain">
+                    <div>
+                        <h4>Águas</h4>
+                    </div>
+                    <img th:src="@{images/cards/water-bottle.webp}" alt="aba de Águas">
+                </button>
             </div>
         </section>
+        <dialog id="modal">
+            <div id="modal_content">
+                <div id="modal_header">
+                    <div id="button_exit">←</div>
+                    <hr>
+                </div>
+
+                <div id="modal_scroll">
+                    <div id="modal_product">
+                        <img src="Foto do produto.jpg" alt="">
+                        <div>
+                            <h4>Grande(40cm) - 12 Fatias</h4>
+                            <p>Pizza com ate 2 sabores e 12 fatias</p>
+                        </div>
+                    </div>
+                    <div id="modal_generate">
+                        <ul>
+                            <li>
+                                <img src="Foto do Produto.png" alt="">
+                                <div>
+                                    <h5>Sabor</h5>
+                                    <p>Ingredientes<br><span>R$ 99.99</span></p>
+                                </div>
+                            </li>
+                            <li>
+                                <img src="Foto do Produto.png" alt="">
+                                <div>
+                                    <h5>Sabor</h5>
+                                    <p>Ingredientes<br><span>R$ 99.99</span></p>
+                                </div>
+                            </li>
+                            <li>
+                                <img src="Foto do Produto.png" alt="">
+                                <div>
+                                    <h5>Sabor</h5>
+                                    <p>Ingredientes<br><span>R$ 99.99</span></p>
+                                </div>
+                            </li>
+                            <li>
+                                <img src="Foto do Produto.png" alt="">
+                                <div>
+                                    <h5>Sabor</h5>
+                                    <p>Ingredientes<br><span>R$ 99.99</span></p>
+                                </div>
+                            </li>
+                            <li>
+                                <img src="Foto do Produto.png" alt="">
+                                <div>
+                                    <h5>Sabor</h5>
+                                    <p>Ingredientes<br><span>R$ 99.99</span></p>
+                                </div>
+                            </li>
+                            <li>
+                                <img src="Foto do Produto.png" alt="">
+                                <div>
+                                    <h5>Sabor</h5>
+                                    <p>Ingredientes<br><span>R$ 99.99</span></p>
+                                </div>
+                            </li>
+                            <li>
+                                <img src="Foto do Produto.png" alt="">
+                                <div>
+                                    <h5>Sabor</h5>
+                                    <p>Ingredientes<br><span>R$ 99.99</span></p>
+                                </div>
+                            </li>
+                            <li>
+                                <img src="Foto do Produto.png" alt="">
+                                <div>
+                                    <h5>Sabor</h5>
+                                    <p>Ingredientes<br><span>R$ 99.99</span></p>
+                                </div>
+                            </li>
+                            <li>
+                                <img src="Foto do Produto.png" alt="">
+                                <div>
+                                    <h5>Sabor</h5>
+                                    <p>Ingredientes<br><span>R$ 99.99</span></p>
+                                </div>
+                            </li>
+                            <li>
+                                <img src="Foto do Produto.png" alt="">
+                                <div>
+                                    <h5>Sabor</h5>
+                                    <p>Ingredientes<br><span>R$ 99.99</span></p>
+                                </div>
+                            </li>
+                            <li>
+                                <img src="Foto do Produto.png" alt="">
+                                <div>
+                                    <h5>Sabor</h5>
+                                    <p>Ingredientes<br><span>R$ 99.99</span></p>
+                                </div>
+                            </li>
+                            <li>
+                                <img src="Foto do Produto.png" alt="">
+                                <div>
+                                    <h5>Sabor</h5>
+                                    <p>Ingredientes<br><span>R$ 99.99</span></p>
+                                </div>
+                            </li>
+                            <li>
+                                <img src="Foto do Produto.png" alt="">
+                                <div>
+                                    <h5>Sabor</h5>
+                                    <p>Ingredientes</p>
+                                    <p><span>R$ 99.99</span></p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div id="modal_footer">
+                    <div id="modal_observation">
+                        <p>Alguma observação?</p>
+                        <textarea name="observation" id="observation" placeholder="Ex: Tirar cebola, bacon..."></textarea>
+                    </div>
+                    <div id="modal_buy">Continuar</div>
+                </div>
+            </div>
+        </dialog>
     </main>
+
+    <script th:src="@{/scripts/modal.js}"></script>
 </body>
 
 </html>

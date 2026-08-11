@@ -1,0 +1,143 @@
+@import url(../styles/style.css);
+
+.card:hover,
+#button_exit:hover {
+    cursor: pointer;
+}
+
+#modal {
+    position: fixed;
+    margin: auto;
+
+    width: 50vw;
+    height: 90vh;
+    z-index: 1;
+
+    border: 0px;
+    box-shadow: 1px 2px 6px 2px rgb(0 0 0 / 70%);
+    border-radius: 10px;
+
+    background-color: #eeeeee;
+}
+
+#modal h4,
+#modal h5 {
+    color: var(--black);
+}
+
+#modal_content {
+    height: 100%;
+
+    display: grid;
+    grid-template-areas:
+        "header"
+        "content"
+        "footer";
+
+    grid-template-rows: auto minmax(0, 1fr) auto;
+}
+
+#modal_scroll {
+    grid-area: content;
+    overflow-y: scroll;
+}
+
+#modal_footer {
+    grid-area: footer;
+}
+
+#modal_header {
+    grid-area: header;
+    background-color: #e4e4e4;
+}
+
+#modal_header,
+#modal_footer {
+    background-color: #e4e4e4;
+}
+
+#modal_header #button_exit {
+    display: block;
+    color: var(--text);
+
+    margin-left: 5px;
+    padding: 5px;
+    font-size: 24px;
+}
+
+#modal_product,
+#modal_generate,
+#modal_observation,
+#modal_buy {
+    padding: 10px;
+}
+
+#modal_product {
+    height: 200px;
+    padding: 10px;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    grid-template-columns: 1fr 2fr;
+}
+
+#modal_product h4 {
+    margin-bottom: 15px;
+    font-size: 26px;
+}
+
+#modal_product img {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+}
+
+#modal_product div {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    margin-left: 10px;
+}
+
+#modal_generate li {
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+}
+
+#modal_generate li img {
+    min-height: 80px;
+    width: 90%;
+    margin: auto;
+}
+
+#modal_generate li p {
+    color: var(--text-light);
+}
+
+#modal_generate li p span {
+    color: var(--black);
+    font-weight: 500;
+}
+
+#modal_footer {
+    text-align: center;
+}
+
+#modal_footer #modal_observation textarea {
+    width: 40%;
+    height: 50px;
+    border-radius: 3px;
+}
+
+#modal_footer #modal_buy {
+    width: 40%;
+    font-size: 26px;
+    background-color: var(--modal-footer);
+
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    margin: auto;
+    color: var(--white);
+}
