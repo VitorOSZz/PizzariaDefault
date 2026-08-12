@@ -73,8 +73,10 @@
 }
 
 #modal_product {
+    box-sizing: border-box;
     height: 200px;
     padding: 10px;
+
     display: grid;
     justify-content: center;
     align-items: center;
@@ -88,14 +90,16 @@
 
 #modal_product img {
     width: 100%;
-    height: 100%;
+    height: 180px;
+    object-fit: cover;
+
     border-radius: 10px;
 }
 
 #modal_product div {
     display: flex;
     flex-wrap: wrap;
-    align-content: center;
+    flex-direction: column;
     margin-left: 10px;
 }
 
@@ -108,7 +112,11 @@
 
 #modal_generate li img {
     min-height: 80px;
+    max-height: 100px;
     width: 90%;
+
+    padding: 2px;
+    border-radius: 2px;
     margin: auto;
 }
 

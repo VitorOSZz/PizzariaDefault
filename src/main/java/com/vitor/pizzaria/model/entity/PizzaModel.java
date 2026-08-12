@@ -3,7 +3,7 @@ package com.vitor.pizzaria.model.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name="Pizzas")
+@Table(name="pizzas")
 public class PizzaModel {
 
     @Id

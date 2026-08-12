@@ -20,5 +20,5 @@ class PizzaController {
     PizzaController(PizzaService pizzaService) {
         this.pizzaService = pizzaService;
     }
-    
+
 }

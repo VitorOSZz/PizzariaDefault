@@ -235,6 +235,8 @@ main .card {
     border-radius: 10px;
     overflow: hidden;
     text-decoration: none;
+    text-align: left;
+    align-content: center;
 }
 
 main h3 {
@@ -243,6 +245,7 @@ main h3 {
 
 .card div {
     display: grid;
+    align-content: space-around;
 }
 
 .card p {
