@@ -6,6 +6,9 @@
     --black: rgb(22, 21, 21);
     --text: #4d4d4d;
     --text-light: #6B6B6B;
+    --text-light-2: #bab9b9;
+    --text-light-3: #a19e9e;
+
 
     --modal-footer: rgb(46, 156, 46);
 }
@@ -237,6 +240,13 @@ main .card {
     text-decoration: none;
     text-align: left;
     align-content: center;
+
+    transition-duration: 0.2s;
+}
+
+main .card:hover {
+    background-color: #e3e3e3;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
 main h3 {

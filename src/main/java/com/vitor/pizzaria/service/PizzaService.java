@@ -32,7 +32,7 @@ public class PizzaService {
         return switch (option) {
             case "medium" -> PizzaSize.MEDIUM;
             case "big" -> PizzaSize.BIG;
-            case "giant" -> PizzaSize.FAMILY;
+            case "giant" -> PizzaSize.GIANT;
             case "napoletana" -> PizzaSize.NAPOLETANA;
             default -> throw new IllegalArgumentException("Invalid size option");
         };

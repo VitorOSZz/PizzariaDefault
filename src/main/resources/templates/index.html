@@ -205,7 +205,7 @@
             </div>
         </section>
         <dialog id="modal">
-            <div id="modal_content">
+            <form id="modal_content">
                 <div id="modal_header">
                     <div id="button_exit">←</div>
                     <hr>
@@ -227,11 +227,12 @@
                     </div>
                     <div id="modal_buy">Continuar</div>
                 </div>
-            </div>
+            </form>
         </dialog>
     </main>
 
     <script th:src="@{/scripts/modal.js}"></script>
+    <script th:src="@{/scripts/modal-checkboxes.js}"></script>
 </body>
 
 </html>

@@ -42,7 +42,7 @@ public class ProductService {
                         <img src="/images/cards/pizza-medium-size.webp" alt="pizza media">
                         <div>
                         <h4>Média (30cm)</h4>
-                        <p>Pizza com 6 fatias</p>
+                        <p>Pizza com 6 fatias e 1 sabor</p>
                         </div>
                         """;
                     case "napoletana":
@@ -78,7 +78,7 @@ public class ProductService {
                 break;
         }
 
-        //System.out.println(type + " " + option + " " + list);
+        System.out.println(type + " " + option + " " + list);
         return list;
     }
 }
