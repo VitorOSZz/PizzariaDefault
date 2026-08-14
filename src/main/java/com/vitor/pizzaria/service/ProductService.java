@@ -78,7 +78,7 @@ public class ProductService {
                 break;
         }
 
-        System.out.println(type + " " + option + " " + list);
+        //System.out.println(type + " " + option + " " + list);
         return list;
     }
 }

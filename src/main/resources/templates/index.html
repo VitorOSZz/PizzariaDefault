@@ -8,6 +8,7 @@
 
     <link rel="stylesheet" th:href="@{/styles/style.css}">
     <link rel="stylesheet" th:href="@{/styles/modal.css}">
+    <link rel="stylesheet" th:href="@{/styles/cart.css}">
     <link rel="stylesheet" th:href="@{/styles/media-queries.css}">
 </head>
 
@@ -50,6 +51,10 @@
             </div>
         </div>
     </header>
+
+    <div id="cart">
+        <button id="cart-button"><img th:src="@{images/cards/cart.webp}" alt=""></button>
+    </div>
 
     <main id="menu">
         <section id="best_sellers">
@@ -223,16 +228,23 @@
                 <div id="modal_footer">
                     <div id="modal_observation">
                         <p>Alguma observação?</p>
-                        <textarea name="observation" id="observation" placeholder="Ex: Tirar cebola, bacon..."></textarea>
+                        <label for="observation"></label><textarea name="observation" id="observation" placeholder="Ex: Tirar cebola, bacon..."></textarea>
                     </div>
-                    <div id="modal_buy">Continuar</div>
+                    <button type="submit" id="modal_buy">Continuar</button>
                 </div>
             </form>
         </dialog>
     </main>
 
+    <aside id="cart_layout">
+        <div id="cart_header">
+            <h3>Carrinho</h3>
+        </div>
+    </aside>
+
     <script th:src="@{/scripts/modal.js}"></script>
     <script th:src="@{/scripts/modal-checkboxes.js}"></script>
+    <script th:src="@{/scripts/cart-button.js}"></script>
 </body>
 
 </html>

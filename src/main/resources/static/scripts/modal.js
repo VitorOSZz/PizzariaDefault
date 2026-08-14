@@ -9,12 +9,16 @@ buttons.forEach(button => {
     button.addEventListener('click', async (event) => {
         console.log("Button clicked");
 
+        document.getElementById("modal_buy").disabled = false;
+
         const product = button.dataset.product;
         // Generate modal_product
         modal_product.innerHTML = "";
         const [type, option] = product.split("/");
         let response = await fetch(`/api/products/${type}/${option}/modal`);
         modal_product.innerHTML = await response.text();
+
+        currentSize = option;
 
 
         // Generate Product
@@ -31,7 +35,6 @@ buttons.forEach(button => {
 
             let price = product.price / 100;
 
-            console.log(product)
             li.innerHTML = `
                 <label class="flavor-card">
                     <img src="/images/cards/${product.imageName}" alt="">
@@ -39,12 +42,14 @@ buttons.forEach(button => {
                         <h5>${product.name}</h5>
                         <p>${product.description}<br><span>R$ ${price.toFixed(2).replace(".", ",")}</span></p>
                     </div>
-                    <input type="checkbox" name="flavor" value="${product.id}"
-    >
+                    <input type="checkbox" name="flavor"
+                    value="${product.id}"
+                    data-name="${product.name}"
+                    data-price="${product.price}">
                 </label>
             `;
 
-            console.log("Product id: " + product.id)
+            //console.log("Product id: " + product.id)
 
             product_list.appendChild(li);
         });
