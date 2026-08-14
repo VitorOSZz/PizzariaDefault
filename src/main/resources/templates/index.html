@@ -13,6 +13,7 @@
 </head>
 
 <body>
+    <div id="overlay"></div>
 
     <section class="hero">
         <h1 class="restaurant-name">Pizzaria Default</h1>
@@ -53,7 +54,7 @@
     </header>
 
     <div id="cart">
-        <button id="cart-button"><img th:src="@{images/cards/cart.webp}" alt=""></button>
+        <button id="cart-button"><img th:src="@{images/icons/cart.webp}" alt=""></button>
     </div>
 
     <main id="menu">
@@ -237,14 +238,46 @@
     </main>
 
     <aside id="cart_layout">
-        <div id="cart_header">
-            <h3>Carrinho</h3>
+        <div id="cart_content">
+            <div id="cart_header">
+                <button id="cart_back_button"><img th:src="@{images/icons/icon-left-arrow.webp}" alt=""></button>
+                <h3>Carrinho</h3>
+            </div>
+            <div id="cart_generate">
+
+                <div class="cart_card">
+                    <div class="cart_card_info">
+                        <h5>Pizza Grande</h5>
+                        <p>Pizza de Framboesa com chocolate frio<br></p>
+                        <p><span>${product.price}</span></p>
+                    </div>
+                    <div class="cart_card_buttons">
+                        <button id="button-less">-</button>
+                        <div>1</div>
+                        <button id="button-plus">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="cart_footer">
+                <div id="cart_footer_price">
+                    <h4>Subtotal</h4>
+                    <p>R$ 68,00</p>
+                </div>
+
+                <div id="cart_footer_finish">
+                    <h3>Total</h3>
+                    <p>R$ 68,00</p>
+                </div>
+                <button>Finalizar pedido</button>
+            </div>
         </div>
     </aside>
 
     <script th:src="@{/scripts/modal.js}"></script>
     <script th:src="@{/scripts/modal-checkboxes.js}"></script>
     <script th:src="@{/scripts/cart-button.js}"></script>
+    <script th:src="@{/scripts/cart.js}"></script>
 </body>
 
 </html>

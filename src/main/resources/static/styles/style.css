@@ -2,15 +2,23 @@
 
 :root {
     --red: rgb(177, 59, 59);
+    --green: rgb(46, 156, 46);
     --white: rgb(241, 233, 233);
     --black: rgb(22, 21, 21);
+
     --text: #4d4d4d;
     --text-light: #6B6B6B;
     --text-light-2: #bab9b9;
     --text-light-3: #a19e9e;
 
+    /* Cart */
+    --cart-background: #F5F5F5;
+    --item-background: #FFFFFF;
+    --light-red: #D95353;
+    --light-green: #2E9B38;
+    --border: rgb(34 34 34 / 45%);
 
-    --modal-footer: rgb(46, 156, 46);
+
 }
 
 * {
@@ -233,7 +241,7 @@ main .card {
     min-height: 100px;
     max-width: 300px;
     padding: 10px;
-    border: 0px;
+    border: 0;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
     border-radius: 10px;
     overflow: hidden;

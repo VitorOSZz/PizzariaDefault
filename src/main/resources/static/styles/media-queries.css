@@ -106,4 +106,9 @@
     #best_sellers .card {
         max-width: 170px;
     }
+
+    #cart_layout {
+        max-width: 37vw;
+        justify-self: flex-end;
+    }
 }

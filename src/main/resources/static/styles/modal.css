@@ -152,7 +152,7 @@
 #modal_footer #modal_buy {
     width: 40%;
     font-size: 26px;
-    background-color: var(--modal-footer);
+    background-color: var(--light-green);
 
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
