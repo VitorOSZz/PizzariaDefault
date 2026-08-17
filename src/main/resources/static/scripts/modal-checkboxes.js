@@ -82,6 +82,7 @@ function validateForm() {
 }
 
 function createItem() {
+    let type = "pizza";
     const item = [];
 
     form["flavor"].forEach(flavor => {
@@ -101,6 +102,7 @@ function createItem() {
 
     return {
         id: crypto.randomUUID(),
+        type: type,
         size: currentSize,
         flavors: item,
         price: price,

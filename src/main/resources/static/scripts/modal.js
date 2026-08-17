@@ -20,7 +20,6 @@ buttons.forEach(button => {
 
         currentSize = option;
 
-
         // Generate Product
         console.log("Product: " + product);
 
@@ -30,12 +29,11 @@ buttons.forEach(button => {
 
         product_list.innerHTML = "";
 
-        products.forEach(product => {
-            const li = document.createElement("li");
-
-            let price = product.price / 100;
-
-            li.innerHTML = `
+        if (type === "pizzas") {
+            products.forEach(product => {
+                let li = document.createElement("li");
+                let price = product.price / 100;
+                li.innerHTML = `
                 <label class="flavor-card">
                     <img src="/images/cards/${product.imageName}" alt="">
                     <div>
@@ -45,15 +43,15 @@ buttons.forEach(button => {
                     <input type="checkbox" name="flavor"
                     value="${product.id}"
                     data-name="${product.name}"
-                    data-price="${product.price}">
+                    data-price="${product.price}"
+                    data-type="${type}">
                 </label>
             `;
+                product_list.appendChild(li);
+            });
+        }
 
-            //console.log("Product id: " + product.id)
-
-            product_list.appendChild(li);
-        });
-
+        closeCart()
         modal.showModal()
 
         if (type === "pizzas") {

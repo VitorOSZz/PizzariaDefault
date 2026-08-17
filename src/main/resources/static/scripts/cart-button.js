@@ -1,7 +1,7 @@
 const main = document.querySelector("#menu");
 const cart = document.querySelector("#cart");
 
-function updateCart() {
+function updateCartButton() {
     const mainTop = main.getBoundingClientRect().top;
 
     if (mainTop <= window.innerHeight) {
@@ -10,5 +10,5 @@ function updateCart() {
         cart.style.display = "none";
     }
 }
-updateCart();
-window.addEventListener("scroll", updateCart);
+updateCartButton();
+window.addEventListener("scroll", updateCartButton);

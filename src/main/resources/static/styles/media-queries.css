@@ -58,6 +58,10 @@
         margin-left: 30px;
     }
 
+    #modal {
+        width: 50vw;
+    }
+
     #cart_layout {
         max-width: 50vw;
         justify-self: flex-end;
@@ -110,5 +114,9 @@
     #cart_layout {
         max-width: 37vw;
         justify-self: flex-end;
+    }
+
+    #cart_card_buttons {
+        max-width: 70%;
     }
 }
