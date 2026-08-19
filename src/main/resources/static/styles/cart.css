@@ -219,7 +219,10 @@
     padding-top: 7px;
 }
 
-#cart_footer button {
+#cart_footer a {
+    text-decoration: none;
+    cursor: pointer;
+
     display: flex;
 
     justify-content: center;
@@ -236,4 +239,8 @@
     font-size: 20px;
     color: var(--white);
     background-color: var(--light-green);
+}
+
+#cart_footer a:hover {
+    background-color: var(--green);
 }
