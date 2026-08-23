@@ -134,7 +134,9 @@
 }
 
 .cart_card_info h5 {
-    font-size: 18px;
+    font-size: 21px;
+    font-weight: 400;
+    color: var(--black);
 }
 
 .cart_card_info p {
@@ -183,6 +185,7 @@
     width: 25%;
     height: 50%;
     text-align: center;
+    font-weight: 500;
 }
 
 .button-plus {

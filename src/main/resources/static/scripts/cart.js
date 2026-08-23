@@ -52,35 +52,39 @@ function generateCart() {
             return;
         }
 
-        let size = {
-            "medium": "Média",
-            "big": "Grande",
-            "giant": "Família"
-        }[item.size];
+        console.log("Generating cart, type: " + item.type)
 
-        let flavors = "Pizza";
-        if (item.flavors.length > 1) {
-            item.flavors.forEach(flavor => {
-                flavors += " metade " + flavor.name + " e";
-            })
-            flavors = flavors.slice(0, -" e".length)
-        } else {
-            flavors += " de " + item.flavors[0].name;
-        }
-        let itemPrice = String(item.price);
-        let price = parsePrice(itemPrice);
-        let quantity = item.quantity;
+        if (item.type === "pizzas") {
+            let size = {
+                "medium": "Média",
+                "big": "Grande",
+                "giant": "Família",
+                "napoletana": "Napoletana"
+            }[item.size];
 
-        text += `<div class="cart_card" id="${item.id}">
+            let flavors = "Pizza";
+            if (item.flavors.length > 1) {
+                item.flavors.forEach(flavor => {
+                    flavors += " metade " + flavor.name + " e";
+                })
+                flavors = flavors.slice(0, -" e".length)
+            } else {
+                flavors += " de " + item.flavors[0].name;
+            }
+            let itemPrice = String(item.price);
+            let price = parsePrice(itemPrice);
+            let quantity = item.quantity;
+
+            text += `<div class="cart_card" id="${item.id}">
                     <div class="cart_card_info">
                         <h5>Pizza ${size}</h5>
                         <p>${flavors}<br></p>`
 
-        if (item.observation !== "") {
-            text += `<p class="cart_card_observation">Obs: ${item.observation}</p>`
-        }
+            if (item.observation !== "") {
+                text += `<p class="cart_card_observation">Obs: ${item.observation}</p>`
+            }
 
-        text += `<p><span>R$ ${price}</span></p>
+            text += `<p><span>R$ ${price}</span></p>
                 </div>
                     <div class="cart_card_buttons">
                         <button class="button-less" data-product="${item.id}">-</button>
@@ -88,7 +92,36 @@ function generateCart() {
                         <button class="button-plus" data-product="${item.id}">+</button>
                     </div>
                 </div>`;
+        } else if (item.type === "drinks") {
+            let itemPrice = String(item.price);
+            let price = parsePrice(itemPrice);
+            let quantity = item.quantity;
 
+            let option = {
+                "water": "Água",
+                "soda": "Refrigerante",
+                "beer": "Cerveja"
+            }[item.option];
+
+            text += `<div class="cart_card" id="${item.id}">
+        <div class="cart_card_info">
+            <h5>${option}</h5>
+            <p>${item.name}</p>`;
+
+            if (item.observation !== "") {
+                text += `<p class="cart_card_observation">Obs: ${item.observation}</p>`;
+            }
+
+            text += `<p><span>R$ ${price}</span></p>
+        </div>
+
+        <div class="cart_card_buttons">
+            <button class="button-less" data-product="${item.id}">-</button>
+            <div id="quantity-${item.id}">${quantity}</div>
+            <button class="button-plus" data-product="${item.id}">+</button>
+        </div>
+    </div>`;
+        }
     })
     cartGenerate.innerHTML = text;
 }

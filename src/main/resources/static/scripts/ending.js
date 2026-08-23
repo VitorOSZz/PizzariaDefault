@@ -21,12 +21,21 @@ function getCartItems() {
 }
 
 function generateFlavors(flavors) {
-    return flavors.map(flavor => `
+    if (flavors.length > 1) {
+        return flavors.map(flavor => `
         <div class="checkout-card-flavor">
             <span>${flavor.name}</span>
-            <span>R$ ${parsePrice(flavor.price)}</span>
         </div>
     `).join("");
+        // <span>R$ ${parsePrice(flavor.price)}</span>
+    } else if (flavors.length === 1) {
+        return `
+            <div class="checkout-card-flavor">
+                <span>${flavors[0].name}</span>
+            </div>`;
+    } else {
+        return `Algo deu errado, porfavor comunique a Pizzaria.`
+    }
 }
 
 function generateCheckout() {
@@ -44,32 +53,55 @@ function generateCheckout() {
     }
 
     endingButton.style.display = "block";
-    endingGenerate.innerHTML = cart.map(item => `
-        <article class="checkout-card" id="${item.id}">
-            <div>
-                <h2>${item.type} ${sizes[item.size] ?? item.size}</h2>
-            </div>
+    endingGenerate.innerHTML = cart.map(item => {
 
-            <div class="checkout-card-flavors">
-                ${generateFlavors(item.flavors)}
-            </div>
+        let title;
+        let content;
 
-            ${(item.observation ?? "").trim() !== "" ? `
-                <p class="checkout-card-observation">
-                    Obs: ${item.observation}
-                </p>
-            ` : ""}
+        if (item.type === "pizzas") {
+            title = `Pizza ${sizes[item.size] ?? item.size}`;
 
-            <footer class="checkout-card-footer">
-                <span class="checkout-card-price">
-                    R$ ${parsePrice(item.price * item.quantity)}
-                </span>
-                <span class="checkout-card-quantity">
-                    x${item.quantity}
-                </span>
-            </footer>
-        </article>
-    `).join("");
+            content = `
+                <div class="checkout-card-flavors">
+                    ${generateFlavors(item.flavors)}
+                </div>
+            `;
+        } else if (item.type === "drinks") {
+            title = "Refrigerante";
+
+            content = `
+                <div class="checkout-card-flavors">
+                    <p>${item.name}</p>
+                </div>
+            `;
+        }
+
+        return `
+            <article class="checkout-card" id="${item.id}">
+                <div>
+                    <h2>${title}</h2>
+                </div>
+
+                ${content}
+
+                ${(item.observation ?? "").trim() !== "" ? `
+                    <p class="checkout-card-observation">
+                        Obs: ${item.observation}
+                    </p>
+                ` : ""}
+
+                <div class="checkout-card-footer">
+                    <span class="checkout-card-price">
+                        R$ ${parsePrice(item.price * item.quantity)}
+                    </span>
+
+                    <span class="checkout-card-quantity">
+                        x${item.quantity}
+                    </span>
+                </div>
+            </article>
+        `;
+    }).join("");
 }
 
 function generateFooter() {
@@ -87,7 +119,7 @@ function generateFooter() {
         total += item.price * item.quantity
     });
 
-    ending_footer.innerHTML = `<div>Total</div><div>R$ ${parsePrice(total)}</div>`;
+    ending_footer.innerHTML = `<div>Total</div><div><span>R$ ${parsePrice(total)}</span></div>`;
 }
 
 generateFooter();

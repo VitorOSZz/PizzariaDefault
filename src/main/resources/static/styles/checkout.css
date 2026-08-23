@@ -38,20 +38,23 @@ body {
 }
 
 #ending-content {
-    width: min(92vw, 820px);
+    width: min(92vw, 600px);
     margin: 20px auto 0;
-    padding-bottom: 30px;
+
+    overflow: hidden;
+
+    border-radius: 10px;
 }
 
 .checkout-card {
     display: grid;
-    gap: 14px;
 
     margin-bottom: 14px;
-    padding: 16px;
+    padding: 12px;
 
     background-color: var(--item-background);
     border: 2px solid var(--border);
+    gap: 1px;
     border-radius: 10px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
 }
@@ -79,14 +82,13 @@ body {
     gap: 12px;
 
     padding: 8px 0;
-    border-bottom: 1px solid rgb(34 34 34 / 12%);
 
     color: var(--text);
 }
 
 .checkout-card-flavor span:last-child {
     white-space: nowrap;
-    font-weight: 600;
+    font-weight: 500;
     color: var(--black);
 }
 
@@ -99,13 +101,32 @@ body {
     font-size: 14px;
 }
 
-.checkout-card-footer {
+#ending-content .checkout-card-footer, #ending-footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 12px;
 
-    background-color: white;
+    border-top: 1px solid #e0e0e0;
+
+    font-size: 22px;
+    font-weight: 600;
+    margin-top: 5px;
+
+    color: var(--black);
+}
+
+#ending-footer-and-button {
+    padding: 0 12px;
+    border-top: 1px solid var(--border);
+}
+
+#ending-footer-and-button #ending-footer {
+    border-top: none;
+}
+
+#ending-footer {
+    border-top: 1px solid var(--border);
+    padding-top: 5px;
 }
 
 .checkout-card-price {
@@ -115,11 +136,16 @@ body {
 }
 
 .checkout-card-quantity {
-    padding: 6px 12px;
+    padding: 6px 10px;
 
     background-color: var(--light-green);
     color: var(--white);
     border-radius: 10px;
+
+    height: 80%;
+    display: flex;
+    align-content: center;
+    flex-wrap: wrap;
 
     font-weight: 700;
 }
@@ -132,8 +158,6 @@ body {
     text-align: center;
 
     background-color: var(--item-background);
-    border: 2px solid var(--border);
-    border-radius: 10px;
 }
 
 .checkout-empty h2 {
@@ -149,8 +173,9 @@ body {
 }
 
 #ending-button {
-    width: min(92vw, 420px);
-    margin: 20px auto 0;
+    width: min(92vw, 300px);
+    max-width: 300px;
+    margin: 12px auto;
 }
 
 #ending-button a {
@@ -174,7 +199,7 @@ body {
 }
 
 #ending-button a:hover {
-    background-color: var(--green);
+    background-color: var(--light-green-2);
 }
 
 #ending-button a svg {
@@ -189,9 +214,5 @@ body {
 @media screen and (min-width: 750px) {
     #ending-content {
         margin-top: 30px;
-    }
-
-    .checkout-card {
-        padding: 20px;
     }
 }

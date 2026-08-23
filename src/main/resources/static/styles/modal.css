@@ -87,6 +87,7 @@
     justify-content: center;
     align-items: center;
     grid-template-columns: 1fr 2fr;
+    gap: 10px;
 }
 
 #modal_product h4 {
@@ -110,23 +111,46 @@
 }
 
 #modal_generate label {
+    max-height: 132px;
     display: grid;
     grid-template-columns: 1fr 5fr;
     align-items: center;
     border-bottom: 1px solid #ddd;
 }
 
-#modal_generate label img {
-    height: 80%;
-    width: 90%;
-    padding: 2px;
+#modal_generate label > .product-info {
+    height: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
 
+#modal_generate label .image-container {
+    width: 90%;
+    height: 80%;
+    aspect-ratio: 1;
+    padding: 2px;
     border-radius: 15px;
     margin: auto;
+    overflow: hidden;
+}
+
+#modal_generate label .image-container img {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+#modal_generate label .image-container img.contain {
+    object-fit: contain;
+}
+
+#modal_generate label .image-container img.cover {
+    object-fit: cover;
 }
 
 #modal_generate label div {
-    padding: 0px 10px;
+    padding: 0 10px;
 }
 
 #modal_generate label p {
@@ -146,6 +170,8 @@
     width: 40%;
     height: 50px;
     border-radius: 3px;
+    padding: 5px;
+    margin-top: 5px;
 }
 
 #modal_footer #modal_buy {
@@ -155,8 +181,17 @@
 
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
+    border: none;
+    box-shadow: 1px 2px 2px rgb(22 21 21 / 77%);
     margin: auto;
     color: var(--white);
+
+    transition-duration: 0.2s;
+}
+
+#modal_footer #modal_buy:hover {
+    cursor: pointer;
+    background-color: var(--light-green-2);
 }
 
 .flavor-card {

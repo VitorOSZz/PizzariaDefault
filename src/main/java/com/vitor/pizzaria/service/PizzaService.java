@@ -49,12 +49,28 @@ public class PizzaService {
             String name = pizzaModel.getName();
             String description = pizzaModel.getDescription();
             String imageName = pizzaModel.getImage_name();
+            String imageFit = pizzaModel.getImage_fit();
             PizzaSize pizzaSize = pizzaPrice.getSize();
             BigDecimal price = pizzaPrice.getPrice();
 
-            pizzas.add(new PizzaDTO(id, name, description, imageName, pizzaSize, price));
+            pizzas.add(new PizzaDTO(id, name, description, imageName, imageFit, pizzaSize, price));
         }
 
         return pizzas;
+    }
+
+    public PizzaDTO getPizzaBySizeAndId(String size, Long id) {
+        PizzaPriceModel pizzaPriceModel = pizzaPriceRepository.getPizzaPriceModelBySizeAndId(id, convertSize(size));
+        PizzaModel pizzaModel = pizzaRepository.getPizzaModelByPizza_id(pizzaPriceModel.getPizza_id());
+
+        return new PizzaDTO(
+                pizzaPriceModel.getPizza_id(),
+                pizzaModel.getName(),
+                pizzaModel.getDescription(),
+                pizzaModel.getImage_name(),
+                pizzaModel.getImage_fit(),
+                pizzaPriceModel.getSize(),
+                pizzaPriceModel.getPrice()
+        );
     }
 }

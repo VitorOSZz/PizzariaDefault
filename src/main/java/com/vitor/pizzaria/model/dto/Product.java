@@ -6,12 +6,14 @@ public class Product {
     final String name;
     final String description;
     final String imageName;
+    final String imageFit;
 
-    public Product(Long id, String name, String description, String imageName) {
+    public Product(Long id, String name, String description, String imageName, String imageFit) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.imageName = imageName;
+        this.imageFit = imageFit;
     }
 
     public Long getId() {
@@ -23,9 +25,11 @@ public class Product {
     public String getDescription() {
         return description;
     }
-
     public String getImageName() {
         return imageName;
+    }
+    public String getImageFit() {
+        return imageFit;
     }
 
     @Override
@@ -35,6 +39,7 @@ public class Product {
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", imageName='" + imageName + '\'' +
+                ", imageFit='" + imageFit + '\'' +
                 '}';
     }
 }

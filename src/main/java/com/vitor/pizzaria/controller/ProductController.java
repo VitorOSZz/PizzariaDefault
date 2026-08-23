@@ -37,4 +37,15 @@ class ProductController {
 
         return products;
     }
+
+    @GetMapping("/{type}/{option}/{id}")
+    public List<Product> getProductByTypeAndId(
+            @PathVariable String type,
+            @PathVariable String option,
+            @PathVariable Long id) {
+        List<Product> products;
+        products = productService.findProductById(type, option, id);
+
+        return products;
+    }
 }

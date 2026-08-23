@@ -13,4 +13,7 @@ public interface PizzaPriceRepository extends JpaRepository<PizzaPriceModel, Lon
 
     @Query("SELECT pizza FROM PizzaPriceModel pizza WHERE pizza.size = :size")
     List<PizzaPriceModel> getPizzaPriceModelBySize(@Param("size") PizzaSize size);
+
+    @Query("SELECT pizza FROM PizzaPriceModel pizza WHERE pizza.pizza_id = :pizzaId and pizza.size = :pizzaSize")
+    PizzaPriceModel getPizzaPriceModelBySizeAndId(@Param("pizzaId") Long pizzaId, @Param("pizzaSize") PizzaSize pizzaSize);
 }

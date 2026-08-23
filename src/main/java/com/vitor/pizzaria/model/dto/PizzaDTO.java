@@ -9,8 +9,8 @@ public class PizzaDTO extends Product{
     private final PizzaSize size;
     private final BigDecimal price;
 
-    public PizzaDTO(Long id, String name, String description, String imageName, PizzaSize size, BigDecimal price) {
-        super(id, name, description, imageName);
+    public PizzaDTO(Long id, String name, String description, String imageName, String imageFit, PizzaSize size, BigDecimal price) {
+        super(id, name, description, imageName, imageFit);
         this.size = size;
         this.price = price;
     }

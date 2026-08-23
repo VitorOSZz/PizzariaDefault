@@ -18,7 +18,8 @@ buttons.forEach(button => {
         let response = await fetch(`/api/products/${type}/${option}/modal`);
         modal_product.innerHTML = await response.text();
 
-        currentSize = option;
+        currentType = type;
+        currentOption = option;
 
         // Generate Product
         console.log("Product: " + product);
@@ -29,36 +30,65 @@ buttons.forEach(button => {
 
         product_list.innerHTML = "";
 
-        if (type === "pizzas") {
-            products.forEach(product => {
-                let li = document.createElement("li");
-                let price = product.price / 100;
-                li.innerHTML = `
+        products.forEach(product => {
+            let li = document.createElement("li");
+            let price = product.price / 100;
+
+            let text =
+                `
                 <label class="flavor-card">
-                    <img src="/images/cards/${product.imageName}" alt="">
-                    <div>
-                        <h5>${product.name}</h5>
-                        <p>${product.description}<br><span>R$ ${price.toFixed(2).replace(".", ",")}</span></p>
-                    </div>
-                    <input type="checkbox" name="flavor"
-                    value="${product.id}"
-                    data-name="${product.name}"
-                    data-price="${product.price}"
-                    data-type="${type}">
-                </label>
-            `;
-                product_list.appendChild(li);
-            });
+        <div class="image-container">
+            <img 
+                src="/images/cards/${product.imageName}" 
+                class="${product.imageFit.toLowerCase()}" 
+                alt=""
+            >
+        </div>
+
+        <div class="product-info">
+            <h5>${product.name}</h5>
+                `
+
+            if (product.description != null) {
+                text += `
+<p>${product.description}</p>
+<p><span>R$ ${price.toFixed(2).replace(".", ",")}</span></p>`
+            } else {
+                text += `
+<p></p>
+<p><span>R$ ${price.toFixed(2).replace(".", ",")}</span></p>`
+            }
+
+            text +=
+                `
+</div>
+
+        <input 
+            type="checkbox" 
+            name="flavor"
+            value="${product.id}"
+            data-name="${product.name}"
+            data-price="${product.price}"
+            data-type="${type}"
+        >
+    </label>`;
+            li.innerHTML = text;
+            product_list.appendChild(li);
+        });
+        switch (type) {
+            case "pizzas":
+                setFlavorLimit(option);
+                break;
+            case "drinks":
+                setFlavorLimit(option)
+                break;
+            default:
+                window.alert("Desculpe algo deu errado. Favor contatar a Pizzaria.")
         }
 
+        form.reset();
         closeCart()
         modal.showModal()
-
-        if (type === "pizzas") {
-            setFlavorLimit(option);
-        } else {
-            setFlavorLimit(type)
-        }
     });
 });
 

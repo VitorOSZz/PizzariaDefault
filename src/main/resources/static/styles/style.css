@@ -16,6 +16,7 @@
     --item-background: #FFFFFF;
     --light-red: #D95353;
     --light-green: #2E9B38;
+    --light-green-2: #2e8c38;
     --border: rgb(34 34 34 / 45%);
 
 
@@ -318,11 +319,13 @@ p span {
 /* Footer */
 
 footer {
-    background-color: var(--black);
     color: white;
 }
 
 /* Specials */
+.contain {
+    object-fit: contain !important;
+}
 .contain img {
     object-fit: contain !important;
 }

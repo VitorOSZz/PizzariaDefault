@@ -19,6 +19,9 @@ public class PizzaModel {
     @Column(name = "image_name")
     private String image_name;
 
+    @Column(name = "image_fit")
+    private String image_fit;
+
     @Override
     public String toString() {
         return "{" +
@@ -39,5 +42,9 @@ public class PizzaModel {
 
     public String getImage_name() {
         return image_name;
+    }
+
+    public String getImage_fit() {
+        return image_fit;
     }
 }

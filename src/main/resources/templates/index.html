@@ -80,13 +80,13 @@
                     <p>A partir de <span>60,00</span></p>
                 </button>
 
-                <button class="card contain" type="button" data-product="drinks/soda/coca-cola-2l">
+                <button class="card contain" type="button" data-product="drinks/soda/1">
                     <img th:src="@{images/cards/Soda 2L.webp}" alt="">
                     <h4>Coca Cola 2L</h4>
                     <p>A partir de <span>18,00</span></p>
                 </button>
 
-                <button class="card contain" type="button" data-product="drinks/soda/coca-cola-zero-2l">
+                <button class="card contain" type="button" data-product="drinks/soda/2">
                     <img th:src="@{images/cards/Soda 2L without sugar.webp}" alt="">
                     <h4>Coca Cola Zero 2L</h4>
                     <p>A partir de <span>12,00</span></p>
@@ -195,14 +195,14 @@
         <section id="drinks">
             <h3>Bebidas</h3>
             <div class="cards">
-                <button class="card contain">
+                <button class="card contain" type="button" data-product="drinks/soda">
                     <div>
                         <h4>Refrigerantes</h4>
                     </div>
                     <img th:src="@{images/cards/Soda 2L.webp}" alt="aba de Refrigerantes">
                 </button>
 
-                <button class="card contain">
+                <button class="card contain" type="button" data-product="drinks/water">
                     <div>
                         <h4>Águas</h4>
                     </div>
@@ -229,7 +229,7 @@
                 <div id="modal_footer">
                     <div id="modal_observation">
                         <p>Alguma observação?</p>
-                        <label for="observation"></label><textarea name="observation" id="observation" placeholder="Ex: Tirar cebola, bacon..."></textarea>
+                        <label for="observation"></label><textarea name="observation" id="observation" placeholder="Ex: Tirar cebola, bacon..." maxlength="100"></textarea>
                     </div>
                     <button type="submit" id="modal_buy">Continuar</button>
                 </div>

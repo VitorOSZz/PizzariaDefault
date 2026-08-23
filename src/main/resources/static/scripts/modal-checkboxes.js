@@ -4,13 +4,18 @@ const maxFlavors = {
     napoletana: 1,
     medium: 1,
     big: 2,
-    giant: 2
+    giant: 2,
+    water: 1,
+    soda: 1,
+    beer: 1
 };
 
 let currentMaxFlavors = 0;
-let currentSize;
+let currentType;
+let currentOption;
 
 function setFlavorLimit(product) {
+    console.log("setFlavorLimit: " + product)
     currentMaxFlavors = maxFlavors[product] ?? 0;
 
     updateFlavorCheckboxes();
@@ -26,9 +31,7 @@ function updateFlavorCheckboxes() {
     );
 
     checkboxes.forEach(checkbox => {
-        checkbox.disabled =
-            !checkbox.checked &&
-            selected.length >= currentMaxFlavors;
+        checkbox.disabled = !checkbox.checked && selected.length >= currentMaxFlavors;
     });
 }
 
@@ -38,31 +41,40 @@ productList.addEventListener('change', event => {
     }
 });
 
-// Submited
+// Submitted
 
 const form = document.forms["modal_content"];
 
 form.addEventListener("submit", (event) => {
+    event.preventDefault();
     console.log("submitted");
-    if (!validateForm()) {
+
+    console.log("Current Type: " + currentType);
+    const flavors = [...form.querySelectorAll('[name="flavor"]:checked')];
+    if (!validateForm(flavors)) {
         return;
     }
 
     const submitButton = form.querySelector('button[type="submit"]');
-
     submitButton.disabled = true;
 
-    const item = createItem();
+    console.log(
+        flavors.map(flavor => ({
+            id: flavor.value,
+            name: flavor.dataset.name
+        }))
+    );
+    const item = createItem(flavors);
     saveItem(item)
 
     console.log(item);
     modal.close();
 });
 
-function validateForm() {
+function validateForm(flavors) {
     let flavors_chosen = 0;
 
-    form["flavor"].forEach(flavor => {
+    flavors.forEach(flavor => {
         if (flavor.checked) {
             flavors_chosen++;
         }
@@ -74,38 +86,50 @@ function validateForm() {
     }
 
     if (flavors_chosen > currentMaxFlavors) {
-        console.log("Limite de sabores por pizza excedido.");
+        window.alert("Limite de sabores por pizza excedido.");
         return false;
     }
 
     return true;
 }
 
-function createItem() {
-    let type = "pizza";
-    const item = [];
+function createItem(flavors = []) {
 
-    form["flavor"].forEach(flavor => {
-        if (flavor.checked) {
-            item.push({
-                id: flavor.value,
-                name: flavor.dataset.name,
-                price: Number(flavor.dataset.price)
-            })
-        }
-    });
-
-    const price = Math.max(
-        ...item.map(flavor => flavor.price)
-    );
     const observation = form["observation"].value;
+
+    if (currentType === "pizzas") {
+
+        const selectedFlavors = flavors.map(flavor => ({
+            id: flavor.value,
+            name: flavor.dataset.name,
+            price: Number(flavor.dataset.price)
+        }));
+
+        const price = Math.max(
+            ...selectedFlavors.map(flavor => flavor.price)
+        );
+
+        return {
+            id: crypto.randomUUID(),
+            type: currentType,
+            size: currentOption,
+            flavors: selectedFlavors,
+            price: price,
+            observation: observation,
+            quantity: 1
+        };
+    }
+
+    // drinks
+    const drink = flavors[0];
 
     return {
         id: crypto.randomUUID(),
-        type: type,
-        size: currentSize,
-        flavors: item,
-        price: price,
+        type: currentType,
+        option: currentOption,
+        itemId: drink.value,
+        name: drink.dataset.name,
+        price: Number(drink.dataset.price),
         observation: observation,
         quantity: 1
     };
@@ -115,19 +139,40 @@ function saveItem(item) {
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
 
     const existingItem = cart.find(cartItem => {
-        const cartFlavors = cartItem.flavors
-            .map(flavor => flavor.id)
-            .sort();
 
-        const itemFlavors = item.flavors
-            .map(flavor => flavor.id)
-            .sort();
+        if (cartItem.type !== item.type) {
+            return false;
+        }
 
-        return (
-            cartItem.size === item.size &&
-            JSON.stringify(cartFlavors) === JSON.stringify(itemFlavors) &&
-            cartItem.observation.trim() === item.observation.trim()
-        );
+        // Pizza
+        if (item.type === "pizzas") {
+            const cartFlavors = cartItem.flavors
+                .map(flavor => flavor.id)
+                .sort();
+
+            const itemFlavors = item.flavors
+                .map(flavor => flavor.id)
+                .sort();
+
+            return (
+                cartItem.size === item.size &&
+                JSON.stringify(cartFlavors) === JSON.stringify(itemFlavors) &&
+                cartItem.observation.trim() === item.observation.trim()
+            );
+        }
+
+        // Drink
+        if (item.type === "drinks") {
+            console.log("cartItem.itemId: " + cartItem.itemId);
+            console.log("item.itemId: " + item.itemId);
+
+            return (
+                cartItem.itemId === item.itemId &&
+                cartItem.observation.trim() === item.observation.trim()
+            );
+        }
+
+        return false;
     });
 
     if (existingItem) {
