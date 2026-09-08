@@ -1,0 +1,19 @@
+aside #title {
+    text-align: center;
+}
+
+aside #title h2 {
+    font-size: 5em;
+}
+
+aside #title p,
+aside nav p,
+aside nav button {
+    font-size: 2em;
+}
+
+aside nav {
+    display: flex;
+    flex-direction: column;
+    background-color: beige;
+}
