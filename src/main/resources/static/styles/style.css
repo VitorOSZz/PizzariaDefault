@@ -1,27 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Bree+Serif&display=swap');
-
-:root {
-    --red: rgb(177, 59, 59);
-    --green: rgb(46, 156, 46);
-    --white: rgb(241, 233, 233);
-    --black: rgb(22, 21, 21);
-
-    --text: #4d4d4d;
-    --text-light: #6B6B6B;
-    --text-light-2: #bab9b9;
-    --text-light-3: #a19e9e;
-
-    /* Cart */
-    --cart-background: #F5F5F5;
-    --item-background: #FFFFFF;
-    --light-red: #D95353;
-    --light-green: #2E9B38;
-    --light-green-2: #2e8c38;
-    --border: rgb(34 34 34 / 45%);
-
-
-}
-
 * {
     margin: 0px;
     padding: 0px;
@@ -91,7 +67,7 @@ header #content p {
     background-image:
         linear-gradient(rgba(0, 0, 0, 0.45),
             rgba(0, 0, 0, 0.45)),
-        url("../banner.jpg");
+        url("/api/images/banner.jpg");
     background-size: cover;
     background-position: center;
 
@@ -113,7 +89,7 @@ header #content p {
     letter-spacing: 3px;
     text-transform: uppercase;
 
-    font-family: "Bree Serif", serif;
+    font-family: var(--font-family-1);
     font-weight: 400;
     font-style: normal;
 }
@@ -222,7 +198,7 @@ main {
 }
 
 main h3 {
-    font-family: "Bree Serif", serif;
+    font-family: var(--font-family-1);
     font-weight: 400;
     font-style: normal;
 }
@@ -326,6 +302,7 @@ footer {
 .contain {
     object-fit: contain !important;
 }
+
 .contain img {
     object-fit: contain !important;
 }

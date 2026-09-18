@@ -1,4 +1,20 @@
 @media screen and (min-width: 750px) {
+    #product {
+        position: fixed;
+        inset: 0 0 0 auto;
+        min-width: 420px;
+        width: 50vw;
+        max-width: 620px;
+        height: 100vh;
+        max-height: 100vh;
+        margin: 0;
+    }
+
+    #product_body form,
+    #product_description {
+        gap: 12px;
+    }
+
     main section {
         width: 100vw;
 
@@ -118,5 +134,16 @@
 
     #cart_card_buttons {
         max-width: 70%;
+    }
+}
+
+@media screen and (max-width: 749px) {
+    #product {
+        width: 100vw;
+        max-width: 100vw;
+    }
+
+    #product_image>div {
+        width: 100%;
     }
 }

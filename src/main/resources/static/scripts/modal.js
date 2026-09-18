@@ -15,8 +15,10 @@ buttons.forEach(button => {
         // Generate modal_product
         modal_product.innerHTML = "";
         const [type, option] = product.split("/");
-        let response = await fetch(`/api/products/${type}/${option}/modal`);
-        modal_product.innerHTML = await response.text();
+        let response = sessionStorage.getItem("products");
+        response = JSON.parse(response);
+
+        modal_product.innerHTML = response[`/api/products/${type}/${option}/modal`];
 
         currentType = type;
         currentOption = option;
@@ -24,8 +26,8 @@ buttons.forEach(button => {
         // Generate Product
         console.log("Product: " + product);
 
-        response = await fetch(`/api/products/${type}/${option}`);
-        let products = await response.json();
+        response = response[`/api/products/${type}/${option}`];
+        let products = JSON.parse(response)
         console.log(products)
 
         product_list.innerHTML = "";
@@ -39,7 +41,7 @@ buttons.forEach(button => {
                 <label class="flavor-card">
         <div class="image-container">
             <img 
-                src="/images/cards/${product.imageName}" 
+                src="/api/images/cards/${product.imageName}" 
                 class="${product.imageFit.toLowerCase()}" 
                 alt=""
             >

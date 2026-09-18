@@ -1,0 +1,308 @@
+fieldset {
+    border: none;
+}
+
+#product_header,
+#product_body {
+    padding: 18px 20px;
+    border-bottom: 1px solid var(--admin-border);
+}
+
+#product {
+    --dialog-red: #98605a;
+    --dialog-red-light: #f5e9e6;
+    --dialog-red-2: #b77970;
+    --dialog-green: #527b61;
+    --dialog-green-light: #edf4ee;
+
+    width: min(620px, 100vw);
+    min-height: 100vh;
+    margin: 0;
+    border: 0;
+    border-left: 1px solid var(--admin-border);
+    box-shadow: -12px 0 35px rgba(72, 45, 40, 0.08);
+}
+
+#product_header>div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#product_header>div h1 {
+    font-size: 22px;
+}
+
+#product_header p {
+    margin-top: 6px;
+    color: var(--admin-text-secondary);
+    font-size: 14px;
+}
+
+#product_header>div button {
+    width: 32px;
+    height: 32px;
+    border: 0;
+    border-radius: 6px;
+    background: transparent;
+    color: var(--admin-text-secondary);
+    cursor: pointer;
+}
+
+#product_header>div button:hover {
+    background: var(--admin-background-2);
+}
+
+#product_body form,
+#product_description {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 14px;
+}
+
+#product_type input[type="radio"],
+#product_status input[type="radio"] {
+    display: none;
+}
+
+#product_type legend,
+#product_status legend,
+#product_description label {
+    color: var(--admin-text);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+#product_type>div,
+#product_status>div {
+    display: flex;
+    gap: 8px;
+    width: 100%;
+    margin-top: 7px;
+}
+
+#product_type>div label,
+#product_status>div label {
+    flex: 1;
+    padding: 9px 10px;
+    border: 1px solid var(--admin-border);
+    border-radius: 6px;
+    background: var(--admin-background-2);
+    color: var(--admin-text-secondary);
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+#product_type>div label:hover,
+#product_status>div label:hover {
+    border-color: var(--dialog-red-2);
+}
+
+#product_type input[type="radio"]:checked+label {
+    border-color: var(--dialog-red);
+    background: var(--dialog-red-light);
+    color: var(--dialog-red);
+}
+
+#product_description label span {
+    color: var(--dialog-red);
+}
+
+#product_name,
+#product_desc,
+#product_image {
+    display: grid;
+    gap: 6px;
+    width: 100%;
+}
+
+#product_name input,
+#product_desc input,
+#product_image input[type="text"],
+.size-price-row input {
+    width: 100%;
+    min-height: 36px;
+    padding: 8px 10px;
+    border: 1px solid var(--admin-border);
+    border-radius: 6px;
+    background: var(--admin-surface);
+    color: var(--admin-text);
+}
+
+#product_name input:focus,
+#product_desc input:focus,
+#product_image input[type="text"]:focus,
+.size-price-row input:focus {
+    outline: 2px solid var(--dialog-red-light);
+    border-color: var(--dialog-red-2);
+}
+
+#product_name input::placeholder,
+#product_desc input::placeholder,
+#product_image input[type="text"]::placeholder {
+    color: var(--text-light);
+}
+
+#product_image>div {
+    display: grid;
+    grid-template-columns: 120px minmax(0, 1fr);
+    gap: 12px;
+    width: 100%;
+    min-height: 92px;
+}
+
+#image-preview {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 120px;
+    height: 92px;
+    overflow: hidden;
+    border: 1px dashed var(--admin-border);
+    border-radius: 8px;
+    background: var(--admin-background-2);
+}
+
+#image-preview span {
+    color: var(--admin-text-secondary);
+    font-size: 12px;
+}
+
+#image-preview img {
+    width: 120px;
+    height: 92px;
+    object-fit: cover;
+}
+
+#image_text {
+    display: grid;
+    align-content: center;
+    gap: 7px;
+}
+
+#image_text>label {
+    padding: 9px 10px;
+    border: 1px solid var(--admin-border);
+    border-radius: 6px;
+    background: var(--admin-surface);
+    color: var(--admin-text-secondary);
+    text-align: center;
+    cursor: pointer;
+}
+
+#image_text>label:hover {
+    border-color: var(--dialog-red-2);
+    color: var(--dialog-red);
+}
+
+input[type="file"] {
+    display: none;
+}
+
+#product_status>div {
+    margin-top: 7px;
+}
+
+#product_status #status_active[type="radio"]:checked+label {
+    border-color: var(--dialog-green);
+    background: var(--dialog-green-light);
+    color: var(--dialog-green);
+}
+
+#product_status #status_inactive[type="radio"]:checked+label {
+    border-color: #b8bdc2;
+    background: #f0f2f3;
+    color: var(--admin-text-secondary);
+}
+
+#size-prices {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 9px;
+}
+
+.size-price-row {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    padding: 9px;
+    border: 1px solid var(--admin-border);
+    border-radius: 8px;
+    background: var(--admin-surface);
+}
+
+.size-checkbox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.size-checkbox input {
+    width: 17px;
+    height: 17px;
+    accent-color: var(--dialog-red);
+    cursor: pointer;
+}
+
+.size-price-content {
+    display: grid;
+    gap: 5px;
+    min-width: 0;
+}
+
+.size-price-content label {
+    color: var(--admin-text);
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.price-input {
+    display: flex;
+    align-items: center;
+    min-height: 36px;
+    overflow: hidden;
+    border: 1px solid var(--admin-border);
+    border-radius: 6px;
+    background: var(--admin-surface);
+}
+
+.price-input span {
+    padding-left: 10px;
+    color: var(--admin-text-secondary);
+    font-size: 13px;
+}
+
+.price-input input {
+    min-height: 34px;
+    padding-left: 4px;
+    border: 0;
+    outline: 0;
+    background: transparent;
+}
+
+.price-input:focus-within {
+    outline: 2px solid var(--dialog-red-light);
+    border-color: var(--dialog-red-2);
+}
+
+#save-product {
+    width: 100%;
+    padding: 11px;
+    border: 0;
+    border-radius: 6px;
+    background: var(--dialog-red);
+    color: #fff;
+    cursor: pointer;
+}
+
+#save-product:hover {
+    background: var(--dialog-red-2);
+}
+
+@media screen and (max-width: 749px) {
+    #product {
+        width: 100vw;
+        max-width: 100vw;
+    }
+}

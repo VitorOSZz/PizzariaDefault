@@ -4,20 +4,29 @@ import com.vitor.pizzaria.model.dto.PizzaDTO;
 import com.vitor.pizzaria.model.dto.Product;
 import com.vitor.pizzaria.model.entity.PizzaPriceModel;
 import com.vitor.pizzaria.repository.DrinkRepository;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 @Service
 public class ProductService {
 
     private final PizzaService pizzaService;
     private final DrinkService drinkService;
+    private final ThreadPoolTaskExecutor executor;
 
-    public ProductService(PizzaService pizzaService, DrinkRepository drinkRepository) {
+    public ProductService(PizzaService pizzaService, DrinkRepository drinkRepository, @Qualifier("productExecutor") ThreadPoolTaskExecutor executor) {
         this.pizzaService = pizzaService;
         this.drinkService = new DrinkService(drinkRepository);
+        this.executor = executor;
     }
 
     public String getProductHeader(String type, String option) {
@@ -28,7 +37,7 @@ public class ProductService {
                 switch (option) {
                     case "giant":
                         return """
-                                <img src="/images/cards/pizza-giant-size.webp" alt="pizza tamanho familia">
+                                <img src="/api/images/cards/pizza-giant-size.webp" alt="pizza tamanho familia">
                                 <div>
                                 <h4>Família (40cm)</h4>
                                 <p>Pizza com ate 2 sabores e 12 fatias</p>
@@ -36,7 +45,7 @@ public class ProductService {
                                 """;
                     case "big":
                         return """
-                                <img src="/images/cards/pizza-big-size.webp" alt="pizza grande">
+                                <img src="/api/images/cards/pizza-big-size.webp" alt="pizza grande">
                                 <div>
                                 <h4>Grande (35cm)</h4>
                                 <p>Pizza com ate 2 sabores e 8 fatias</p>
@@ -44,7 +53,7 @@ public class ProductService {
                                 """;
                     case "medium":
                         return """
-                                <img src="/images/cards/pizza-medium-size.webp" alt="pizza media">
+                                <img src="/api/images/cards/pizza-medium-size.webp" alt="pizza media">
                                 <div>
                                 <h4>Média (30cm)</h4>
                                 <p>Pizza com 6 fatias e 1 sabor</p>
@@ -52,7 +61,7 @@ public class ProductService {
                                 """;
                     case "napoletana":
                         return """
-                                <img src="/images/cards/napoletana.webp" alt="napoletana">
+                                <img src="/api/images/cards/napoletana.webp" alt="napoletana">
                                 <div>
                                 <h4>Napoletana</h4>
                                 <p>Pizza com 4 fatias</p>
@@ -64,21 +73,21 @@ public class ProductService {
                 switch (option) {
                     case "soda":
                         return """
-                                <img src="/images/cards/Soda 2L.webp" alt="refrigerantes" class="contain">
+                                <img src="/api/images/cards/Soda 2L.webp" alt="refrigerantes" class="contain">
                                 <div>
                                 <h4>Refrigerantes</h4>
                                 </div>
                                 """;
                     case "water":
                         return """
-                                <img src="/images/cards/water-bottle.webp" alt="Águas" class="contain">
+                                <img src="/api/images/cards/water-bottle.webp" alt="Águas" class="contain">
                                 <div>
                                 <h4>Águas</h4>
                                 </div>
                                 """;
                     case "beer":
                         return """
-                                <img src="/images/cards/beer.webp" alt="Águas" class="contain">
+                                <img src="/api/images/cards/beer.webp" alt="Águas" class="contain">
                                 <div>
                                 <h4>Cervejas</h4>
                                 </div>
@@ -88,7 +97,7 @@ public class ProductService {
 
         // Default Message
         return """
-                <img src="/images/cards/error.webp" alt="Erro">
+                <img src="/api/images/cards/error.webp" alt="Erro">
                 <div>
                     <h4>Nenhum Produto Encontrado</h4>
                     <p>Não encontramos produtos disponíveis para esta opção.Se o problema persistir, por favor, reporte o erro.</p>
@@ -125,6 +134,39 @@ public class ProductService {
         }
 
         System.out.println(category + " " + option + " " + id + " " + products);
+        return products;
+    }
+
+    public HashMap<String, List<Product>> getAllProducts() {
+
+        CompletableFuture<List<Product>> pizzasMediumFuture = CompletableFuture.supplyAsync(
+                        () -> findProducts("pizzas", "medium"), executor
+        );
+
+        CompletableFuture<List<Product>> pizzasBigFuture = CompletableFuture.supplyAsync(
+                () -> findProducts("pizzas", "big"), executor
+        );
+
+        CompletableFuture<List<Product>> pizzasGiantFuture = CompletableFuture.supplyAsync(
+                () -> findProducts("pizzas", "giant"), executor
+        );
+
+        CompletableFuture<List<Product>> drinksSodaFuture = CompletableFuture.supplyAsync(
+                () -> findProducts("drinks", "soda"), executor
+        );
+
+        CompletableFuture.allOf(pizzasMediumFuture,
+                pizzasBigFuture,
+                pizzasGiantFuture,
+                drinksSodaFuture).join();
+
+        HashMap<String, List<Product>> products = new HashMap<>();
+
+        products.put("pizzas/medium", pizzasMediumFuture.join());
+        products.put("pizzas/big", pizzasBigFuture.join());
+        products.put("pizzas/giant", pizzasGiantFuture.join());
+        products.put("drinks/soda", drinksSodaFuture.join());
+
         return products;
     }
 }

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
@@ -18,6 +19,11 @@ class ProductController {
 
     ProductController(ProductService productService) {
         this.productService = productService;
+    }
+
+    @GetMapping("")
+    public HashMap<String, List<Product>> getAllProducts() {
+        return productService.getAllProducts();
     }
 
     @GetMapping("{type}/{option}/modal")
