@@ -11,42 +11,45 @@ const initialProducts = [
         type: "pizza",
         name: "Pizza de Calabresa",
         description: "Calabresa, queijo, cebola e oregano",
-        image: "",
+        imageName: "",
+        imageFit: "COVER",
         status: "active",
-        sizes: [
-            { name: "Napoletana", price: 29.9 },
-            { name: "Media", price: 39.9 },
-            { name: "Grande", price: 49.9 },
-            { name: "Familia", price: 59.9 }
-        ]
+        sizes: {
+            Napoletana: 2990,
+            Media: 3990,
+            Grande: 4990,
+            Familia: 5990
+        }
     },
     {
         id: "mock-pizza-frango",
         type: "pizza",
         name: "Pizza de Frango com Catupiry",
         description: "Frango desfiado, catupiry e oregano",
-        image: "",
+        imageName: "",
+        imageFit: "COVER",
         status: "active",
-        sizes: [
-            { name: "Napoletana", price: 32.9 },
-            { name: "Media", price: 42.9 },
-            { name: "Grande", price: 52.9 },
-            { name: "Familia", price: 62.9 }
-        ]
+        sizes: {
+            Napoletana: 3290,
+            Media: 4290,
+            Grande: 5290,
+            Familia: 6290
+        }
     },
     {
         id: "mock-pizza-mussarela",
         type: "pizza",
         name: "Pizza de Mussarela",
         description: "Mussarela, tomate e manjericao",
-        image: "",
+        imageName: "",
+        imageFit: "COVER",
         status: "active",
-        sizes: [
-            { name: "Napoletana", price: 27.9 },
-            { name: "Media", price: 37.9 },
-            { name: "Grande", price: 47.9 },
-            { name: "Familia", price: 57.9 }
-        ]
+        sizes: {
+            Napoletana: 2790,
+            Media: 3790,
+            Grande: 4790,
+            Familia: 5790
+        }
     }
 ];
 
@@ -67,6 +70,10 @@ function saveProducts(products) {
     localStorage.setItem(PRODUCTS_KEY, JSON.stringify(products));
 }
 
+function isSameProductId(firstId, secondId) {
+    return String(firstId) === String(secondId);
+}
+
 function initializeProducts() {
     if (localStorage.getItem(PRODUCTS_KEY) === null) saveProducts(initialProducts);
 }
@@ -77,21 +84,55 @@ function imagePath(imageName) {
     return `/api/images/cards/${imageName}`;
 }
 
+function getProductImageName(product) {
+    return product.imageName || product.image || "";
+}
+
+function priceToCents(price) {
+    return Math.round(Number(price || 0) * 100);
+}
+
+function convertName(name) {
+    name = name.toLowerCase();
+    switch (true) {
+        case name === "napoletana": return "Napoletana";
+        case name === "média" || name === "media": return "medium";
+        case name === "grande": return "big";
+        case name === "familia": return "giant";
+        default:
+            throw Error("this size doesn't exist: " + name)
+    }
+}
+
+function getSizesMap(sizes = {}) {
+    if (Array.isArray(sizes)) {
+        return sizes.reduce((mappedSizes, size) => {
+            mappedSizes[size.name] = priceToCents(size.price);
+            return mappedSizes;
+        }, {});
+    }
+
+    return sizes || {};
+}
+
+function getSizePriceInCents(sizes, sizeName) {
+    const price = getSizesMap(sizes)[sizeName];
+    return Number.isFinite(Number(price)) ? Number(price) : null;
+}
+
 function normalizeApiProduct(product, type, sizeName) {
     return {
-        id: `${type}-${product.id}-${sizeName || product.size || "item"}`,
+        id: product.id,
         sourceId: product.id,
         type,
         name: product.name,
         description: product.description || "",
-        image: imagePath(product.imageName),
+        imageName: product.imageName || "",
+        imageFit: product.imageFit || "COVER",
         status: "active",
-        sizes: [
-            {
-                name: sizeName || product.size || "Unico",
-                price: Number(product.price || 0) / 100
-            }
-        ]
+        sizes: {
+            [sizeName || product.size || "Unico"]: Number(product.price || 0)
+        }
     };
 }
 
@@ -123,10 +164,7 @@ async function loadProductsFromBackend() {
                 const key = `pizza-${apiProduct.id}`;
                 const existingProduct = productsByKey.get(key) || normalizeApiProduct(apiProduct, request.type, request.size);
                 if (productsByKey.has(key)) {
-                    existingProduct.sizes.push({
-                        name: request.size,
-                        price: Number(apiProduct.price || 0) / 100
-                    });
+                    existingProduct.sizes[request.size] = Number(apiProduct.price || 0);
                 }
                 productsByKey.set(key, existingProduct);
                 return;
@@ -177,13 +215,13 @@ function renderProducts() {
 
     count.textContent = `${allProducts.length} ${allProducts.length === 1 ? "produto cadastrado" : "produtos cadastrados"}`;
     productList.innerHTML = products.map(product => {
-        const prices = (product.sizes || []).map(size => Number(size.price)).filter(Number.isFinite);
+        const prices = Object.values(getSizesMap(product.sizes)).map(price => Number(price) / 100).filter(Number.isFinite);
         const lowestPrice = prices.length ? Math.min(...prices) : 0;
         const highestPrice = prices.length ? Math.max(...prices) : 0;
         const priceText = prices.length > 1 && lowestPrice !== highestPrice
             ? `${formatPrice(lowestPrice)} - ${formatPrice(highestPrice)}`
             : formatPrice(lowestPrice);
-        const image = product.image || "/api/images/icons/cart.webp";
+        const image = imagePath(getProductImageName(product)) || "/api/images/icons/cart.webp";
         const statusLabel = product.status === "active" ? "Ativo" : "Inativo";
 
         return `<tr>
@@ -205,12 +243,12 @@ function renderProducts() {
 function renderSizeFields(type, selectedSizes = []) {
     const container = document.getElementById("size-prices");
     container.innerHTML = productSizes[type].map((size, index) => {
-        const savedSize = selectedSizes.find(item => item.name === size);
-        const isSelected = Boolean(savedSize);
-        const inputValue = savedSize ? Number(savedSize.price).toFixed(2) : "";
+        const savedPrice = getSizePriceInCents(selectedSizes, size);
+        const isSelected = savedPrice !== null;
+        const inputValue = isSelected ? (savedPrice / 100).toFixed(2) : "";
         return `<div class="size-price-row">
             <div class="size-checkbox">
-                <input type="checkbox" id="size-enabled-${index}" name="size-enabled-${index}" value="${size}"${isSelected ? " checked" : ""}>
+                <input type="checkbox" id="size-enabled-${index}" name="size-fenabled-${index}" value="${size}"${isSelected ? " checked" : ""}>
             </div>
             <div class="size-price-content">
                 <label for="size-${index}">${size}</label>
@@ -240,7 +278,7 @@ function resetProductForm() {
 
 function edit_product(productId = null) {
     const dialog = document.getElementById("product");
-    const product = productId ? getProducts().find(item => item.id === productId) : null;
+    const product = productId ? getProducts().find(item => isSameProductId(item.id, productId)) : null;
 
     resetProductForm();
     if (product) {
@@ -251,8 +289,8 @@ function edit_product(productId = null) {
         document.querySelector(`[name="type"][value="${product.type}"]`).checked = true;
         document.getElementById("name").value = product.name;
         document.getElementById("desc").value = product.description;
-        document.getElementById("image_url").value = product.image || "";
-        updateImagePreview(product.image || "");
+        document.getElementById("image_url").value = getProductImageName(product);
+        updateImagePreview(imagePath(getProductImageName(product)));
         document.querySelector(`[name="status"][value="${product.status}"]`).checked = true;
         renderSizeFields(product.type, product.sizes);
     }
@@ -260,30 +298,51 @@ function edit_product(productId = null) {
     if (!dialog.open) dialog.showModal();
 }
 
+async function create_product(product) {
+    await fetch(`api/products/`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(product)
+    });
+    console.log(JSON.stringify(product));
+}
+
 function handleFormSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
     const type = formData.get("type");
     const product = {
-        id: editingProductId || crypto.randomUUID(),
+        id: editingProductId || 0,
         type,
         name: formData.get("name").trim(),
         description: formData.get("desc").trim(),
-        image: formData.get("image_url").trim(),
+        imageName: formData.get("image_url").trim(),
+        imageFit: "COVER",
         status: formData.get("status"),
         sizes: productSizes[type]
             .map((name, index) => ({
-                name,
-                price: Number(formData.get(`size-${index}`)),
-                enabled: formData.has(`size-enabled-${index}`)
+                name: convertName(name),
+                price: priceToCents(formData.get(`size-${index}`)),
+                enabled: document.getElementById(`size-enabled-${index}`).checked
             }))
             .filter(size => size.enabled)
-            .map(({ name, price }) => ({ name, price }))
+            .reduce(
+                (sizes, { name, price }) => { sizes[name] = price; return sizes; }, {})
     };
     const products = getProducts();
-    const productIndex = products.findIndex(item => item.id === product.id);
-    if (productIndex >= 0) products[productIndex] = product;
-    else products.push(product);
+    const productIndex = products.findIndex(item => isSameProductId(item.id, product.id));
+    console.log(product);
+    if (productIndex >= 0) {
+        // Update
+        products[productIndex] = product;
+    }
+    else {
+        // Create
+        products.push(product);
+        create_product(product);
+    }
     saveProducts(products);
     event.currentTarget.closest("dialog").close();
     renderProducts();
@@ -302,14 +361,14 @@ function bindProductList() {
         if (editId) edit_product(editId);
         if (statusId) {
             const products = getProducts();
-            const product = products.find(item => item.id === statusId);
+            const product = products.find(item => isSameProductId(item.id, statusId));
             if (!product) return;
             product.status = product.status === "active" ? "inactive" : "active";
             saveProducts(products);
             renderProducts();
         }
         if (deleteId) {
-            saveProducts(getProducts().filter(product => product.id !== deleteId));
+            saveProducts(getProducts().filter(product => !isSameProductId(product.id, deleteId)));
             renderProducts();
         }
     });
@@ -335,7 +394,7 @@ async function initializeProductPage() {
         form.addEventListener("submit", handleFormSubmit);
         const imageUrl = document.getElementById("image_url");
         const imageFile = document.getElementById("image_file");
-        imageUrl.addEventListener("input", () => updateImagePreview(imageUrl.value.trim()));
+        imageUrl.addEventListener("input", () => updateImagePreview(imagePath(imageUrl.value.trim())));
         imageFile.addEventListener("change", () => {
             const [file] = imageFile.files;
             if (!file) return;

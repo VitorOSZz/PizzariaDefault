@@ -2,6 +2,7 @@ package com.vitor.pizzaria.service;
 
 import com.vitor.pizzaria.enums.DrinkCategory;
 import com.vitor.pizzaria.enums.PizzaSize;
+import com.vitor.pizzaria.model.dto.CreateProductRequestDTO;
 import com.vitor.pizzaria.model.dto.DrinkDTO;
 import com.vitor.pizzaria.model.entity.DrinkModel;
 import com.vitor.pizzaria.repository.DrinkRepository;
@@ -61,5 +62,21 @@ class DrinkService {
                 drinkModel.getCategory(),
                 drinkModel.getSize(),
                 drinkModel.getPrice());
+    }
+
+    public void saveDrink(CreateProductRequestDTO productRequestDTO) {
+        List<DrinkModel> products = new ArrayList<>();
+        productRequestDTO.getSizes().forEach((key, value) ->
+                products.add(
+                        new DrinkModel(
+                                productRequestDTO.getName(),
+                                DrinkCategory.valueOf("SODA"),
+                                key,
+                                productRequestDTO.getSizes().get(key),
+                                productRequestDTO.getImageName(),
+                                productRequestDTO.getImageFit(),
+                                productRequestDTO.getDescription()
+                        )
+                ));
     }
 }

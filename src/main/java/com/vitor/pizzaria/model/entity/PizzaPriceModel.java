@@ -9,6 +9,19 @@ import java.math.BigDecimal;
 @Table(name="pizzas_price")
 public class PizzaPriceModel {
 
+
+    public PizzaPriceModel() {}
+
+    protected PizzaPriceModel pizzaPriceModel() {
+        return null;
+    };
+
+    public PizzaPriceModel(Long pizza_id, PizzaSize size, BigDecimal price) {
+        this.pizza_id = pizza_id;
+        this.size = size;
+        this.price = price;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long pizza_price_id;

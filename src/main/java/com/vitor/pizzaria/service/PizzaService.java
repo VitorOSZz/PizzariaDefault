@@ -1,6 +1,7 @@
 package com.vitor.pizzaria.service;
 
 import com.vitor.pizzaria.enums.PizzaSize;
+import com.vitor.pizzaria.model.dto.CreateProductRequestDTO;
 import com.vitor.pizzaria.model.dto.PizzaDTO;
 import com.vitor.pizzaria.model.entity.PizzaModel;
 import com.vitor.pizzaria.model.entity.PizzaPriceModel;
@@ -29,7 +30,7 @@ public class PizzaService {
     }
 
     private PizzaSize convertSize(String option) {
-        return switch (option) {
+        return switch (option.toLowerCase()) {
             case "medium" -> PizzaSize.MEDIUM;
             case "big" -> PizzaSize.BIG;
             case "giant" -> PizzaSize.GIANT;
@@ -72,5 +73,26 @@ public class PizzaService {
                 pizzaPriceModel.getSize(),
                 pizzaPriceModel.getPrice()
         );
+    }
+
+    public void savePizza(CreateProductRequestDTO productRequestDTO) {
+        // Pizza Model
+        PizzaModel pizzaModel = new PizzaModel(
+                productRequestDTO.getName(),
+                productRequestDTO.getDescription(),
+                productRequestDTO.getImageName(),
+                productRequestDTO.getImageFit());
+        pizzaRepository.save(pizzaModel);
+
+        // PizzaPriceModel
+        List<PizzaPriceModel> pizzaPriceModels = new ArrayList<>();
+        productRequestDTO.getSizes().forEach((key, value) -> {
+            pizzaPriceModels.add(new PizzaPriceModel(
+                    pizzaModel.getPizza_id(),
+                    convertSize(key),
+                    BigDecimal.valueOf(productRequestDTO.getSizes().get(key)))
+                    );
+        });
+        pizzaPriceRepository.saveAll(pizzaPriceModels);
     }
 }

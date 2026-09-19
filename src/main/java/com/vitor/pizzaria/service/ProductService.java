@@ -1,12 +1,19 @@
 package com.vitor.pizzaria.service;
 
+import com.vitor.pizzaria.enums.DrinkCategory;
+import com.vitor.pizzaria.model.dto.CreateProductRequestDTO;
 import com.vitor.pizzaria.model.dto.PizzaDTO;
 import com.vitor.pizzaria.model.dto.Product;
+import com.vitor.pizzaria.model.entity.DrinkModel;
+import com.vitor.pizzaria.model.entity.PizzaModel;
 import com.vitor.pizzaria.model.entity.PizzaPriceModel;
 import com.vitor.pizzaria.repository.DrinkRepository;
+import com.vitor.pizzaria.repository.PizzasRepository;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpStatus;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -168,5 +175,15 @@ public class ProductService {
         products.put("drinks/soda", drinksSodaFuture.join());
 
         return products;
+    }
+
+    public void addProduct(CreateProductRequestDTO productRequestDTO) {
+
+        System.out.println("Adding product " + productRequestDTO);
+        switch(productRequestDTO.getType()) {
+            case "pizza" -> pizzaService.savePizza(productRequestDTO);
+            case "drink" -> drinkService.saveDrink(productRequestDTO);
+        }
+
     }
 }

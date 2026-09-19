@@ -81,4 +81,14 @@ public class DrinkModel {
                 ", description='" + description + '\'' +
                 '}';
     }
+
+    public DrinkModel(String name, DrinkCategory category, String size, Integer price, String image, String image_fit, String description) {
+        this.name = name;
+        this.category = category;
+        this.size = size;
+        this.price = price;
+        this.image = image;
+        this.image_fit = image_fit;
+        this.description = description;
+    }
 }
