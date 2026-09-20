@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pizzaria Default</title>
+
+    <link rel="stylesheet" th:href="@{/pizzaria-default/styles/root.css}">
+    <link rel="stylesheet" th:href="@{/pizzaria-default/styles/style.css}">
+    <link rel="stylesheet" th:href="@{/pizzaria-default/styles/modal.css}">
+    <link rel="stylesheet" th:href="@{/pizzaria-default/styles/cart.css}">
+    <link rel="stylesheet" th:href="@{/pizzaria-default/styles/media-queries.css}">
+</head>
+
+<body>
+    <div id="overlay"></div>
+
+    <section class="hero">
+        <h1 class="restaurant-name">Pizzaria Default</h1>
+        <div class="hero-content">
+
+            <h1>A melhor pizza<br>da sua região</h1>
+
+            <p>
+                Massa artesanal, ingredientes selecionados e aquele sabor de pizzaria de verdade.
+            </p>
+
+            <a href="#menu" class="hero-button">
+                Ver cardápio
+            </a>
+        </div>
+
+        <a href="#menu" class="scroll-indicator">
+            <span id="scroll-indicator-text">Role para ver</span>
+            <span class="scroll-arrow">↓</span>
+        </a>
+    </section>
+
+    <header>
+
+        <div id="content">
+            <!-- Telephone -->
+            <div>
+                <img th:src="@{/api/images/icons/icon-telephone.png}" alt="">
+                <p>+55 (41) 3334-2546</p>
+            </div>
+
+            <!-- Hour. Javascript to change -->
+            <div>
+                <img th:src="@{/api/images/icons/icon-clock.png}" alt="">
+                <p>Sexta 18:00 às 23:30</p>
+            </div>
+        </div>
+    </header>
+
+    <div id="cart">
+        <button id="cart-button"><img th:src="@{/api/images/icons/cart.webp}" alt=""></button>
+    </div>
+
+    <main id="menu">
+        <section id="best_sellers">
+            <h3>Mais vendidos</h3>
+
+            <div class="cards">
+                <button class="card" type="button" data-product="pizzas/giant">
+                    <img th:src="@{/api/images/cards/pizza-giant-size.webp}" alt="">
+                    <h4>Pizza Família (40cm - 12 Fatias) com Refrigerante 2L</h4>
+                    <p>A partir de <span>120,00</span></p>
+                </button>
+
+                <button class="card" type="button" data-product="pizzas/big">
+                    <img th:src="@{/api/images/cards/pizza-big-size.webp}" alt="">
+                    <h4>Pizza Grande (35cm - 8 Fatias)</h4>
+                    <p>A partir de <span>80,00</span></p>
+                </button>
+
+                <button class="card" type="button" data-product="pizzas/medium">
+                    <img th:src="@{/api/images/cards/pizza-medium-size.webp}" alt="">
+                    <h4>Pizza Média (30cm - 6 Fatias)</h4>
+                    <p>A partir de <span>60,00</span></p>
+                </button>
+
+                <button class="card contain" type="button" data-product="drinks/soda/1">
+                    <img th:src="@{/api/images/cards/Soda 2L.webp}" alt="">
+                    <h4>Coca Cola 2L</h4>
+                    <p>A partir de <span>18,00</span></p>
+                </button>
+
+                <button class="card contain" type="button" data-product="drinks/soda/2">
+                    <img th:src="@{/api/images/cards/Soda 2L without sugar.webp}" alt="">
+                    <h4>Coca Cola Zero 2L</h4>
+                    <p>A partir de <span>12,00</span></p>
+                </button>
+            </div>
+        </section>
+        <section id="pizzas">
+            <section id="napoletanas">
+                <h3>Pizzas Estilo Napoletanas</h3>
+
+                <div class="cards">
+                    <button class="card" type="button" data-product="pizzas/napoletana">
+                        <div>
+                            <h4>Pizza Napoletana</h4>
+                            <p>Pizza com 1 sabor e 4 fatias</p>
+                            <p>A partir de <span>R$ 68,00</span></p>
+                        </div>
+                        <img th:src="@{/api/images/cards/napoletana.webp}" alt="">
+                    </button>
+                </div>
+            </section>
+
+            <section id="pizzas-size">
+                <h3>Pizzas</h3>
+
+                <div class="cards">
+
+                    <button class="card" type="button" data-product="pizzas/giant">
+                        <div>
+                            <h4>Família (40cm)</h4>
+                            <p>Pizza com ate 2 sabores e 12 fatias</p>
+                            <p>A partir de <span>R$ 120,00</span></p>
+                        </div>
+                        <img th:src="@{/api/images/cards/pizza-giant-size.webp}" alt="">
+                    </button>
+
+                    <button class="card" type="button" data-product="pizzas/big">
+                        <div>
+                            <h4>Grande (35cm)</h4>
+                            <p>Pizza com ate 2 sabores e 8 fatias</p>
+                            <p>A partir de <span>R$ 80,00</span></p>
+                        </div>
+                        <img th:src="@{/api/images/cards/pizza-big-size.webp}" alt="">
+                    </button>
+
+                    <button class="card" type="button" data-product="pizzas/medium">
+                        <div>
+                            <h4>Média (30cm)</h4>
+                            <p>Pizza com ate 2 sabores e 6 fatias</p>
+                            <p>A partir de <span>R$ 60,00</span></p>
+                        </div>
+                        <img th:src="@{/api/images/cards/pizza-medium-size.webp}" alt="">
+                    </button>
+                </div>
+            </section>
+        </section>
+        <section id="calzones">
+            <h3>Calzones</h3>
+            <div class="cards">
+                <button class="card">
+                    <div>
+                        <h4>Quatro Queijos</h4>
+                        <p>Mussarela, parmesão, provolone, catupiry, molho de tomate e orégano</p>
+                        <p>A partir de <span>R$ 70,00</span></p>
+                    </div>
+                    <img th:src="@{/api/images/cards/calzone.webp}" alt="Pizza Quatro Queijos">
+                </button>
+
+                <button class="card">
+                    <div>
+                        <h4>Frango Especial</h4>
+                        <p>Mussarela, frango, palmito, catupiry, molho de tomate e orégano</p>
+                        <p>A partir de <span>R$ 70,00</span></p>
+                    </div>
+                    <img th:src="@{/api/images/cards/calzone.webp}" alt="Pizza Frango Especial">
+                </button>
+
+                <button class="card">
+                    <div>
+                        <h4>Canadense</h4>
+                        <p>Mussarela, lombo, champignon, palmito, catupiry, molho de tomate e orégano</p>
+                        <p>A partir de <span>R$ 70,00</span></p>
+                    </div>
+                    <img th:src="@{/api/images/cards/calzone.webp}" alt="Pizza Canadense">
+                </button>
+
+                <button class="card">
+                    <div>
+                        <h4>Pizzaiolo</h4>
+                        <p>Mussarela, presunto, milho, ervilha, cebola, azeitonas, molho de tomate e orégano</p>
+                        <p>A partir de <span>R$ 70,00</span></p>
+                    </div>
+                    <img th:src="@{/api/images/cards/calzone.webp}" alt="Pizza Pizzaiolo">
+                </button>
+
+                <button class="card">
+                    <div>
+                        <h4>Portuguesa</h4>
+                        <p>Mussarela, presunto, ovo, cebola, ervilha, milho, azeitona, molho de tomate e orégano</p>
+                        <p>A partir de <span>R$ 70,00</span></p>
+                    </div>
+                    <img th:src="@{/api/images/cards/calzone.webp}" alt="Pizza Portuguesa">
+                </button>
+            </div>
+        </section>
+        <section id="drinks">
+            <h3>Bebidas</h3>
+            <div class="cards">
+                <button class="card contain" type="button" data-product="drinks/soda">
+                    <div>
+                        <h4>Refrigerantes</h4>
+                    </div>
+                    <img th:src="@{/api/images/cards/Soda 2L.webp}" alt="aba de Refrigerantes">
+                </button>
+
+                <button class="card contain" type="button" data-product="drinks/water">
+                    <div>
+                        <h4>Águas</h4>
+                    </div>
+                    <img th:src="@{/api/images/cards/water-bottle.webp}" alt="aba de Águas">
+                </button>
+            </div>
+        </section>
+        <dialog id="modal">
+            <form id="modal_content">
+                <div id="modal_header">
+                    <div id="button_exit">←</div>
+                    <hr>
+                </div>
+
+                <div id="modal_scroll">
+                    <div id="modal_product">
+                    </div>
+                    <div id="modal_generate">
+                        <ul id="product_list">
+                        </ul>
+                    </div>
+                </div>
+
+                <div id="modal_footer">
+                    <div id="modal_observation">
+                        <p>Alguma observação?</p>
+                        <label for="observation"></label><textarea name="observation" id="observation" placeholder="Ex: Tirar cebola, bacon..." maxlength="100"></textarea>
+                    </div>
+                    <button type="submit" id="modal_buy">Continuar</button>
+                </div>
+            </form>
+        </dialog>
+    </main>
+
+    <aside id="cart_layout">
+        <div id="cart_content">
+            <div id="cart_header">
+                <button id="cart_back_button"><img th:src="@{/api/images/icons/icon-left-arrow.webp}" alt=""></button>
+                <h3>Carrinho</h3>
+            </div>
+            <div id="cart_generate">
+
+                <div class="cart_card">
+                    <div class="cart_card_info">
+                        <h5>Pizza Grande</h5>
+                        <p>Pizza de Framboesa com chocolate frio<br></p>
+                        <p><span>${product.price}</span></p>
+                    </div>
+                    <div class="cart_card_buttons">
+                        <button class="button-less">-</button>
+                        <div>1</div>
+                        <button class="button-plus">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="cart_footer">
+                <div id="cart_footer_price">
+                    <h4>Subtotal</h4>
+                    <p>R$ 68,00</p>
+                </div>
+
+                <div id="cart_footer_finish">
+                    <h3>Total</h3>
+                    <p>R$ 68,00</p>
+                </div>
+                <a th:href="@{{slug}/checkout(slug=${slug})}">Finalizar pedido</a>
+            </div>
+        </div>
+    </aside>
+    <script th:src="@{/pizzaria-default/scripts/modal.js}"></script>
+    <script th:src="@{/pizzaria-default/scripts/loaded-index-page.js}"></script>
+    <script th:src="@{/pizzaria-default/scripts/modal-checkboxes.js}"></script>
+    <script th:src="@{/pizzaria-default/scripts/cart-button.js}"></script>
+    <script th:src="@{/pizzaria-default/scripts/cart.js}"></script>
+</body>
+
+</html>

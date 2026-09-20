@@ -1,8 +1,6 @@
 package com.vitor.pizzaria.controller;
 
-import com.vitor.pizzaria.model.dto.Product;
 import com.vitor.pizzaria.service.ProductService;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,37 +19,4 @@ class ProductController {
         this.productService = productService;
     }
 
-    @GetMapping("")
-    public HashMap<String, List<Product>> getAllProducts() {
-        return productService.getAllProducts();
-    }
-
-    @GetMapping("{type}/{option}/modal")
-    public String getProductModalHeader(
-            @PathVariable String type,
-            @PathVariable String option) {
-        return productService.getProductHeader(type, option);
-    }
-
-    @GetMapping("/{type}/{option}")
-    public List<Product> getListOfProducts(
-            @PathVariable String type,
-            @PathVariable String option) {
-
-        List<Product> products;
-        products = productService.findProducts(type, option);
-
-        return products;
-    }
-
-    @GetMapping("/{type}/{option}/{id}")
-    public List<Product> getProductByTypeAndId(
-            @PathVariable String type,
-            @PathVariable String option,
-            @PathVariable Long id) {
-        List<Product> products;
-        products = productService.findProductById(type, option, id);
-
-        return products;
-    }
 }
