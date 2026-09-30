@@ -15,18 +15,13 @@
         gap: 12px;
     }
 
-    main section {
+    main section, #sections_products {
         width: 100vw;
-
         margin: auto;
     }
 
     #best_sellers,
-    #pizzas,
-    #napoletanas,
-    #pizzas-size,
-    #calzones,
-    #drinks {
+    #sections_products section {
         max-width: calc(100vw - 100px);
     }
 
