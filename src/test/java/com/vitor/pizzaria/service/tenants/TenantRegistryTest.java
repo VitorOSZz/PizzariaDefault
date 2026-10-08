@@ -1,25 +1,42 @@
 package com.vitor.pizzaria.service.tenants;
 
+import com.vitor.pizzaria.model.entity.Restaurant;
 import com.vitor.pizzaria.repository.RestaurantRepository;
-import org.aspectj.lang.annotation.Before;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.Objects;
+import java.time.OffsetDateTime;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 @SpringBootTest
 class TenantRegistryTest {
 
     @Autowired
     TenantRegistry tenantRegistry;
+
+    @Autowired
+    RestaurantRepository restaurantRepository;
+
+    @BeforeEach
+    void setUp() {
+        restaurantRepository.deleteAll();
+
+        Restaurant restaurant = new Restaurant();
+        restaurant.setId(UUID.fromString("f647dd6d-3cef-4d3c-824c-10d49fcc6546"));
+        restaurant.setStatus("ACTIVE");
+        restaurant.setName("Pizzaria Default");
+        restaurant.setSlug("pizzaria-default");
+        restaurant.setCreatedAt(OffsetDateTime.now());
+        restaurant.setUpdatedAt(OffsetDateTime.now());
+        restaurantRepository.save(restaurant);
+
+        tenantRegistry.loadTenants();
+    }
 
     @DisplayName("getRestaurantId - Getting an invalid specific tenant")
     @Test
@@ -41,6 +58,6 @@ class TenantRegistryTest {
         // creating the correct UUID to compare
         UUID restaurantCorrect = UUID.fromString(uuid);
 
-        assertEquals(tryRestaurantId, restaurantCorrect);
+        assertEquals(restaurantCorrect, tryRestaurantId);
     }
 }

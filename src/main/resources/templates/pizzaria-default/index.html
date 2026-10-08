@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
@@ -156,11 +156,11 @@
                     <h3>Total</h3>
                     <p>R$ 68,00</p>
                 </div>
-                <a th:href="@{{slug}/checkout(slug=${slug})}">Finalizar pedido</a>
+                <a th:href="@{/{slug}/checkout(slug=${slug})}" id="button-checkout">Finalizar pedido</a>
             </div>
         </div>
     </aside>
-    <script type="module" th:src="@{/pizzaria-default/scripts/pages/menu.js}"></script>
+    <script type="module" th:src="@{/pizzaria-default/scripts/pages/catalog.js}"></script>
 </body>
 
 </html>

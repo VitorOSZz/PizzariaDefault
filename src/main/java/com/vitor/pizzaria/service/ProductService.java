@@ -115,7 +115,7 @@ public class ProductService {
             );
         }
 
-        catalog.sort(Comparator.comparing(CategoryResponse::sort_order));
+        catalog.sort(Comparator.comparing(CategoryResponse::sort_order).reversed());
 
         return catalog;
     }

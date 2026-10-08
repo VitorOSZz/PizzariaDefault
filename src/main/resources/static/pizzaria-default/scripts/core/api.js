@@ -4,37 +4,62 @@ import {getSlug} from "./utils.js";
 
 // Functions
 
-async function getData(url) {
-    try {
-        const response = await fetch(url);
-        if (!response.ok) {
-            throw new Error(`Response status: ${response.status}`);
+const CATALOG_ENDPOINT = `/${getSlug()}/api/catalog`;
+
+export async function getCatalog() {
+    const response = await fetch(CATALOG_ENDPOINT, {
+        headers: {
+            Accept: "application/json"
         }
+    });
 
-        return await response.json();
-    } catch (error) {
-        console.error(error.message);
+    if (!response.ok) {
+        throw new Error(
+            `Failed to load catalog: ${response.status} ${response.statusText}`
+        );
     }
+
+    const catalog = await response.json();
+
+    if (!Array.isArray(catalog)) {
+        throw new Error("Catalog response must be an array.");
+    }
+
+    return normalizeCatalog(catalog);
 }
 
-export async function get_categories() {
-    let data = await getData(`/${getSlug()}/api/categories`);
-    console.log(data);
-    return data;
-}
+function normalizeCatalog(catalog) {
+    return catalog.map(category => ({
+        id: category.id,
+        name: category.name,
+        description: category.description,
+        sortOrder: category.sort_order ?? 0,
 
-export async function get_products_by_category(category_id) {
-    return await getData(`/${getSlug()}/api/products/${category_id}`);
-}
+        sizes: Array.isArray(category.sizes)
+            ? category.sizes.map(size => ({
+                id: size.id,
+                name: size.name,
+                description: size.description,
+                imageUrl: size.imageUrl,
+                imageFit: size.imageFit,
+                sortOrder: size.sort_order ?? 0,
 
-export async function get_sizes() {
-    return await getData(`/${getSlug()}/api/sizes`);
-}
+                products: Array.isArray(size.products)
+                    ? size.products.map(product => ({
+                        id: product.id,
+                        name: product.name,
+                        description: product.description,
+                        price: product.price,
+                        imageUrl: product.imageUrl,
+                        imageFit: product.imageFit,
+                        sortOrder: product.sortOrder ?? 0
+                    }))
+                    : []
+            }))
+            : [],
 
-export async function get_products() {
-    return await getData(`/${getSlug()}/api/products`);
-}
-
-export async function get_products_prices() {
-    return await getData(`/${getSlug()}/api/products/prices/`)
+        products: Array.isArray(category.products)
+            ? category.products
+            : []
+    }));
 }

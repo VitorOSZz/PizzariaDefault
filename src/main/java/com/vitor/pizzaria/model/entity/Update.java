@@ -2,6 +2,7 @@ package com.vitor.pizzaria.model.entity;
 
 import com.vitor.pizzaria.enums.UpdateAction;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
@@ -37,6 +38,10 @@ public class Update {
     @ColumnDefault("now()")
     @Column(name = "created_at", nullable = false)
     private OffsetDateTime createdAt;
+    @NotNull
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "user_id", nullable = false)
+    private UserAccount user;
 
     public UUID getId() {
         return id;
@@ -84,6 +89,14 @@ public class Update {
 
     public void setCreatedAt(OffsetDateTime createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public UserAccount getUser() {
+        return user;
+    }
+
+    public void setUser(UserAccount user) {
+        this.user = user;
     }
 
 }

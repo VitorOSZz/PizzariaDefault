@@ -24,6 +24,7 @@ public class TenantRegistry {
     public void loadTenants() {
 
         List<Restaurant> restaurants = restaurantRepository.findAll();
+        tenants.clear();
 
         for (Restaurant restaurant : restaurants) {
             tenants.put(restaurant.getSlug(), restaurant.getId());
