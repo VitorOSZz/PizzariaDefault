@@ -4,11 +4,15 @@ import { renderCatalog } from "../components/catalog.js";
 
 import "../cart/cart.js";
 import "../modal/modal.js";
+import {getImageStorage, getSlug} from "../core/utils.js";
 
 async function initializeCatalogPage() {
     try {
         const catalog =
             await getCatalog();
+
+        const slug = getSlug();
+        const imageStorage = getImageStorage();
 
         setCatalog(catalog);
         renderCatalog(catalog);

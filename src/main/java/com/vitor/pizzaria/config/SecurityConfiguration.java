@@ -122,9 +122,9 @@ class SecurityConfiguration {
                                         "frame-ancestors 'none'; " +
                                         "form-action 'self'; " +
                                         "script-src 'self'; " +
-                                        "img-src 'self' https://kapfjzbgdoupteotrxkj.supabase.co; " +
-                                        "style-src 'self'; " +
-                                        "font-src 'self'"
+                                        "img-src 'self' https://dicotbzyonknofyzyuxv.supabase.co https://picsum.photos https://fastly.picsum.photos; " +
+                                        "style-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com; " +
+                                        "font-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com; "
                         ))
                 .addHeaderWriter(new StaticHeadersWriter(
                         "Permissions-Policy",

@@ -64,10 +64,7 @@ header #content p {
 
     min-height: 100vh;
 
-    background-image:
-        linear-gradient(rgba(0, 0, 0, 0.45),
-            rgba(0, 0, 0, 0.45)),
-        url("/api/images/banner.jpg");
+    background-image: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url("https://dicotbzyonknofyzyuxv.supabase.co/storage/v1/object/public/images/pizzaria-default/banner.webp");
     background-size: cover;
     background-position: center;
 

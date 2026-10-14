@@ -3,7 +3,9 @@ import {
 } from "../core/catalog-store.js";
 
 import {
-    formatPrice
+    formatPrice,
+    getImageStorage,
+    getStoredImageUrl
 } from "../core/utils.js";
 
 import {
@@ -45,8 +47,8 @@ const buttonExit =
 const form =
     document.forms["modal_content"];
 
-const FALLBACK_IMAGE_URL =
-    "https://picsum.photos/600/400?random=1";
+const RANDOM_IMAGE_URL =
+    "https://picsum.photos/600/400";
 
 let currentSelection = null;
 let maxProducts = 1;
@@ -58,9 +60,14 @@ function createImage(
 ) {
     const image =
         document.createElement("img");
+    const fallbackUrls = [
+        imageUrl,
+        `${RANDOM_IMAGE_URL}?random=${Date.now()}-${Math.random()}`
+    ].filter((url, index, urls) => url && urls.indexOf(url) === index);
+    let fallbackIndex = 0;
 
     image.src =
-        imageUrl || FALLBACK_IMAGE_URL;
+        fallbackUrls[fallbackIndex];
 
     image.alt = alt;
 
@@ -72,11 +79,34 @@ function createImage(
     image.addEventListener(
         "error",
         () => {
-            image.onerror = null;
-            image.src =
-                FALLBACK_IMAGE_URL;
+            fallbackIndex += 1;
+
+            if (fallbackIndex < fallbackUrls.length) {
+                image.src =
+                    fallbackUrls[fallbackIndex];
+            }
         }
     );
+
+    Promise.all([
+        getStoredImageUrl(imageUrl),
+        getImageStorage("default.webp")
+    ]).then(([storedImageUrl, defaultImageUrl]) => {
+        for (const url of [storedImageUrl, defaultImageUrl]) {
+            if (url && !fallbackUrls.includes(url)) {
+                fallbackUrls.splice(
+                    fallbackUrls.length - 1,
+                    0,
+                    url
+                );
+            }
+        }
+
+        if (!imageUrl && fallbackUrls.length > 0) {
+            image.src =
+                fallbackUrls[0];
+        }
+    });
 
     return image;
 }

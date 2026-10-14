@@ -99,6 +99,8 @@ public class ProductService {
                                 size.getId(),
                                 productsResponsesInThatSize,
                                 size.getName(),
+                                size.getImageUrl(),
+                                size.getImageFit(),
                                 size.getSortOrder()
                         )
                 );

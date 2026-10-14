@@ -1,6 +1,10 @@
-import { formatPrice } from  "../core/utils.js";
+import {
+    formatPrice,
+    getImageStorage,
+    getStoredImageUrl
+} from  "../core/utils.js";
 
-const FALLBACK_IMAGE_URL = "https://picsum.photos/600/400?random=1";
+const RANDOM_IMAGE_URL = "https://picsum.photos/600/400";
 
 function sortByOrder(items) {
     return [...items].sort((a, b) => b.sortOrder - a.sortOrder);
@@ -21,23 +25,59 @@ function getLowestPrice(products) {
  * The API supplies the primary URL, while the frontend guarantees
  * a fallback when the URL is missing or the image request fails.
  */
+
 function createImage(imageUrl, alt, imageFit = null) {
     const image = document.createElement("img");
 
-    image.src = imageUrl || FALLBACK_IMAGE_URL;
     image.alt = alt;
 
     if (imageFit) {
         image.style.objectFit = imageFit.toLowerCase();
     }
 
+    let fallbackIndex = 0;
+    let fallbackUrls = [];
+
     image.addEventListener("error", () => {
-        image.onerror = null;
-        image.src = FALLBACK_IMAGE_URL;
+        fallbackIndex++;
+
+        if (fallbackIndex < fallbackUrls.length) {
+            image.src = fallbackUrls[fallbackIndex];
+        }
     });
+
+    Promise.all([
+        getStoredImageUrl(imageUrl),
+        getImageStorage("default.webp")
+    ])
+        .then(([storedImageUrl, defaultImageUrl]) => {
+            fallbackUrls = [
+                imageUrl,
+                storedImageUrl,
+                defaultImageUrl,
+                `${RANDOM_IMAGE_URL}?random=${Date.now()}-${Math.random()}`
+            ].filter((url, index, urls) =>
+                url && urls.indexOf(url) === index
+            );
+
+            fallbackIndex = 0;
+            image.src = fallbackUrls[0];
+        })
+        .catch(() => {
+            fallbackUrls = [
+                imageUrl,
+                `${RANDOM_IMAGE_URL}?random=${Date.now()}-${Math.random()}`
+            ].filter((url, index, urls) =>
+                url && urls.indexOf(url) === index
+            );
+
+            fallbackIndex = 0;
+            image.src = fallbackUrls[0];
+        });
 
     return image;
 }
+
 
 function createStartingPrice(products) {
     const lowestPrice = getLowestPrice(products);
@@ -85,6 +125,7 @@ function createSizeCard(size, category) {
 
     button.appendChild(content);
 
+    console.log("Size imageUrl: " + size.imageUrl)
     button.appendChild(
         createImage(
             size.imageUrl,

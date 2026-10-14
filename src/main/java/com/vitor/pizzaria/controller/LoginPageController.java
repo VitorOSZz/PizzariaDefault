@@ -9,6 +9,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 @Controller
 class LoginPageController {
 
+    private final ImageController imageController;
+
+    public LoginPageController(ImageController imageController) {
+        this.imageController = imageController;
+    }
+
     @GetMapping("/login")
     public String getLoginPage(Authentication authentication, Model model) {
         return renderLoginPage(authentication, model, "/pizzaria-default/admin");
