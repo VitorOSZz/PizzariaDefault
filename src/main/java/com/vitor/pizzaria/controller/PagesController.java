@@ -6,15 +6,22 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("")
 class PagesController {
 
     private final ImageController imageController;
 
     public PagesController(ImageController imageController) {
         this.imageController = imageController;
+    }
+
+
+    @GetMapping("/")
+    public String home() {
+        return "redirect:/pizzaria-default/";
     }
 
     @GetMapping({"/{slug}", "/{slug}/"})

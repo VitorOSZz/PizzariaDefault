@@ -28,7 +28,13 @@ class TenantFilter extends OncePerRequestFilter {
             HttpServletResponse response,
             FilterChain filterChain) throws ServletException, IOException {
 
-        String slug = request.getRequestURI().split("/")[1];
+        String path = request.getRequestURI();
+        if (path.equals("/")) {
+            filterChain.doFilter(request, response);
+            return;
+        }
+
+        String slug = path.split("/")[1];
         System.out.println(request.getRequestURI() + " - Slug: " + slug);
         tenantContext.setTenantSlug(slug);
 
